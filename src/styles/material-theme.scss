@@ -11,3 +11,6 @@ $theme: mat-light-theme($primary, $accent, $warn);
 
 @include angular-material-theme($theme);
 @include covalent-theme($theme);
+
+@import 'mat-card.custom';
+@import 'td-message.custom';

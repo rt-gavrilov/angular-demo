@@ -1,0 +1,12 @@
+.icon-wrapper {
+  display: flex;
+  cursor: pointer;
+  margin: 10px;
+  width: 150px;
+  height: 150px;
+}
+
+.disabled {
+  cursor: unset;
+  pointer-events: none;
+}

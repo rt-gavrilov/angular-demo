@@ -1,0 +1,27 @@
+<div fxLayoutAlign="center start" fxFill>
+  <mat-card style="margin: 32px; width: 700px;">
+    <h2 fxLayoutAlign="center">
+      That's a simple check for you:
+    </h2>
+
+    <div fxLayout="row wrap" fxLayoutAlign="center">
+      <mat-card *ngFor="let framework of frameworks"
+                [@tdFadeInOut]="framework.shown"
+                [@tdJello]="framework.jello"
+                [@tdHeadshake]="framework.headshake"
+                [@tdBounce]="framework.bounce"
+                [@rtGrayOut]="framework.disabled"
+                fxLayoutAlign="center center"
+                class="icon-wrapper"
+                [class.disabled]="framework.disabled"
+                (mouseenter)="framework.animate($event)"
+                (click)="onSelect(framework)">
+        <img style="width: 100%;" [src]="framework.image">
+      </mat-card>
+    </div>
+
+    <td-message *ngIf="chosen" [color]="chosen.valid ? 'primary' : 'warn'" [sublabel]="chosen.comment">
+    </td-message>
+
+  </mat-card>
+</div>

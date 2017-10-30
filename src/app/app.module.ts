@@ -2,18 +2,19 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatCardModule} from '@angular/material';
+import {AppRoutingModule} from './app-routing.module';
+import {IntroTestGuard} from './intro-test/intro-test.guard';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MatCardModule
+    AppRoutingModule
   ],
-  providers: [],
+  providers: [IntroTestGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
