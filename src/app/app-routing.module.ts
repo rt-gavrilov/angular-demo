@@ -5,6 +5,7 @@ import {IntroTestGuard} from './intro-test/intro-test.guard';
 const routes: Routes = [
   {path: '', canActivate: [IntroTestGuard], children: []},
   {path: 'test', loadChildren: './intro-test/intro-test.module#IntroTestModule'},
+  {path: 'sortings', loadChildren: './sortings/sortings.module#SortingsModule'},
   {path: '*', redirectTo: ''},
 ];
 

@@ -13,4 +13,5 @@ $theme: mat-light-theme($primary, $accent, $warn);
 @include covalent-theme($theme);
 
 @import 'mat-card.custom';
+@import 'mat-form-field.custom';
 @import 'td-message.custom';

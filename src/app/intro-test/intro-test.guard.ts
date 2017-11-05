@@ -8,10 +8,12 @@ export class IntroTestGuard implements CanActivate {
 
   canActivate() {
 
-    const completed = false;
+    const completed = true;
 
     if (! completed) {
       this.router.navigate(['/test']);
+    } else {
+      this.router.navigate(['/sortings']);
     }
 
     return ! completed;

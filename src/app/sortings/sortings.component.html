@@ -1,0 +1,53 @@
+<div fxLayout="row" fxFill fxLayoutGap="16px" style="padding: 16px;" fxLayoutAlign="stretch stretch">
+
+  <mat-card fxFlex="250px" fxLayout="column" fxLayoutAlign="start stretch">
+
+    <h3>Sorting algorithms<br>real-time comparison</h3>
+
+    <br>
+
+    <mat-form-field>
+      <mat-select [(ngModel)]="sortingSetSelected" placeholder="Set">
+        <mat-option [value]="set" *ngFor="let set of sortingSets">{{set.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select [(ngModel)]="arrayTypeSelected" placeholder="Array type">
+        <mat-option [value]="type" *ngFor="let type of arrayTypes">{{type.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <br>
+    <br>
+
+    <button mat-raised-button color="primary" (click)="run()">
+      Run!
+    </button>
+
+  </mat-card>
+
+  <!-- workaround to make chart resize properly -->
+  <mat-card fxFlex="0 0 calc(100% - 250px - 16px)">
+
+    <div fxFill>
+      <ngx-charts-line-chart
+        *ngIf="chartData"
+        [scheme]="colorScheme"
+        [results]="chartData"
+        [xAxis]="true"
+        [yAxis]="true"
+        [legend]="true"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        xAxisLabel="Size"
+        yAxisLabel="Time"
+        [autoScale]="true"
+        [yAxisTickFormatting]="axisDigits"
+        [xAxisTickFormatting]="axisDigits">
+      </ngx-charts-line-chart>
+    </div>
+
+  </mat-card>
+
+</div>
