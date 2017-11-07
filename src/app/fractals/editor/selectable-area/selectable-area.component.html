@@ -1,0 +1,15 @@
+<div #container
+     class="container"
+     (mousedown)="onMouseDown($event)"
+     (mouseup)="onMouseUp($event)"
+     (mousemove)="onMouseMove($event)"
+     (wheel)="onMouseWheel($event)">
+
+  <div class="frame" *ngIf="selectedArea"
+       [style.left]="selectedArea.left + 'px'"
+       [style.top]="selectedArea.top + 'px'"
+       [style.width]="selectedArea.width + 'px'"
+       [style.height]="selectedArea.height + 'px'">
+  </div>
+
+</div>

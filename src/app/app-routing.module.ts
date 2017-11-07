@@ -6,6 +6,7 @@ const routes: Routes = [
   {path: '', canActivate: [IntroTestGuard], children: []},
   {path: 'test', loadChildren: './intro-test/intro-test.module#IntroTestModule'},
   {path: 'sortings', loadChildren: './sortings/sortings.module#SortingsModule'},
+  {path: 'fractals', loadChildren: './fractals/fractals.module#FractalsModule'},
   {path: '*', redirectTo: ''},
 ];
 

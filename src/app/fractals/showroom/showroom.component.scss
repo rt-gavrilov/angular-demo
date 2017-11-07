@@ -1,0 +1,16 @@
+@import '~@angular/material/theming';
+
+mat-card {
+  margin: 16px;
+  padding: 0;
+  cursor: pointer;
+
+  &:hover {
+    @include mat-elevation(10);
+  }
+
+  mat-card-title {
+    margin: 0;
+    padding: 16px;
+  }
+}

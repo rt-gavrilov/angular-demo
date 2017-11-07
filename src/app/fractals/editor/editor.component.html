@@ -1,0 +1,10 @@
+<rt-fractal
+  fxFill
+  [painter]="fractal"
+  [area]="area">
+</rt-fractal>
+
+<rt-selectable-area
+  style="width: 100%; height: 100%; position: absolute; top: 0; left: 0;"
+  (select)="onAreaSelect($event)">
+</rt-selectable-area>

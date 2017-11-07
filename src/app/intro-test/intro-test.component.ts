@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {TdBounceAnimation, TdFadeInOutAnimation, TdHeadshakeAnimation, TdJelloAnimation} from '@covalent/core';
 import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/operator/throttleTime';
-import {GrayOutAnimation} from "./gray-out.animation";
+import {GrayOutAnimation} from "../utils/gray-out.animation";
 import * as lodash from 'lodash';
 
 @Component({

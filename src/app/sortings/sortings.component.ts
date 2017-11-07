@@ -1,7 +1,8 @@
 import {Component} from "@angular/core";
 import {TdDigitsPipe} from "@covalent/core";
-import {ArrayBuilder} from "./algorithms/array-builder";
 import {ALL, PRIMITIVES, SMARTS} from "./algorithms/sortings";
+import {sleep} from "../utils/async-utils";
+import {ArrayBuilder} from "../utils/array-builder";
 
 @Component({
   selector: 'rt-sortings',
@@ -60,16 +61,10 @@ export class SortingsComponent {
           });
       }
 
-      await this.wait(500);
+      await sleep(500);
 
       this.chartData = temp.slice();
     }
-  }
-
-  private async wait(delay: number) {
-    return new Promise( (resolve, reject) => {
-      setTimeout( () => resolve(), delay );
-    });
   }
 
   private createArray(size: number): number[] {

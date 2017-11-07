@@ -1,0 +1,20 @@
+<div fxLayout="row wrap" fxLayoutAlign="center center">
+
+  <mat-card
+    fxFlex="1 1 400px"
+    [@appear]="true"
+    [routerLink]="[fractal.name]"
+    *ngFor="let fractal of fractals">
+
+    <rt-fractal
+      [painter]="fractal"
+      style="height: 300px;">
+    </rt-fractal>
+
+    <mat-card-title>
+      {{fractal.name}}
+    </mat-card-title>
+
+  </mat-card>
+
+</div>

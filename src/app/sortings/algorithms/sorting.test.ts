@@ -9,7 +9,7 @@ import {HeapSorting} from "./heap-sorting";
 import {QuickSorting} from "./quick-sorting";
 import {MergeSorting} from "./merge-sorting";
 import {ShellSorting} from "./shell-sorting";
-import {ArrayBuilder} from "./array-builder";
+import {ArrayBuilder} from "../../utils/array-builder";
 
 export class SortingTest {
 
@@ -53,7 +53,7 @@ export class SortingTest {
 
   }
 
-  checkSorted(array: number[]): boolean {
+  private checkSorted(array: number[]): boolean {
 
     let prev = array[0];
     for (let i = 1; i < array.length; i++) {
