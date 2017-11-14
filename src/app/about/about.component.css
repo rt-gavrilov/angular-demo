@@ -1,0 +1,15 @@
+.icon-wrapper {
+  display: flex;
+  cursor: pointer;
+  margin: 10px;
+  width: 150px;
+  height: 150px;
+}
+
+.small-icon-wrapper {
+  display: flex;
+  cursor: pointer;
+  margin: 10px;
+  width: 100px;
+  height: 100px;
+}

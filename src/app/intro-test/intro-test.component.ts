@@ -4,6 +4,8 @@ import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/operator/throttleTime';
 import {GrayOutAnimation} from "../utils/gray-out.animation";
 import * as lodash from 'lodash';
+import {IntroTestGuard} from "./intro-test.guard";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'rt-intro-test',
@@ -22,7 +24,11 @@ export class IntroTestComponent {
   public readonly frameworks = lodash.shuffle(Framework.THEM_ALL);
   public chosen: Framework;
 
-  constructor() {
+  public completed = false;
+
+  constructor(
+    private router: Router
+  ) {
     for (let i = 0; i < this.frameworks.length; i++) {
       setTimeout(() => this.frameworks[i].shown = true, i * 500);
     }
@@ -30,14 +36,19 @@ export class IntroTestComponent {
 
   public onSelect(value: Framework) {
     this.chosen = value;
-    this.chosen.select();
+    const valid = this.chosen.select();
+    if (valid) {
+      localStorage.setItem(IntroTestGuard.localStorageKey, 'true');
+      this.completed = true;
+      setTimeout(() => this.router.navigate(['/']), 1000);
+    }
   }
 }
 
 class Framework {
 
   public static readonly THEM_ALL = [
-    new Framework('react', 'Is it still good enough?'),
+    new Framework('react', 'Not bad actually, but not in this demo.'),
     new Framework('angular', 'Ok, fine!', true),
     new Framework('vue', 'You cannot be serious!'),
     new Framework('ember', 'What is this?'),
@@ -88,9 +99,11 @@ class Framework {
     setTimeout( () => this.debouncer.next(), 0);
   }
 
-  public select() {
+  public select(): boolean {
     if (! this.valid) {
       this.disabled = true;
     }
+
+    return this.valid;
   }
 }

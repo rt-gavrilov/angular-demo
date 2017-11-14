@@ -2,9 +2,9 @@
 
   <mat-card
     fxFlex="1 1 400px"
-    [@appear]="true"
+    [@appear]="{value: true, params: {delay: 250 * i}}"
     [routerLink]="[fractal.name]"
-    *ngFor="let fractal of fractals">
+    *ngFor="let fractal of fractals; let i = index;">
 
     <rt-fractal
       [painter]="fractal"

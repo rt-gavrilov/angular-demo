@@ -1,21 +1,26 @@
 import {Injectable} from '@angular/core';
-import {CanActivate, Router} from '@angular/router';
+import {ActivatedRoute, CanActivate, Router} from '@angular/router';
+import {sleep} from "../utils/async-utils";
 
 @Injectable()
 export class IntroTestGuard implements CanActivate {
 
-  constructor(private router: Router) {}
+  public static readonly localStorageKey = 'test-completed';
 
-  canActivate() {
+  constructor(
+    private route:ActivatedRoute,
+    private router: Router
+  ) {}
 
-    const completed = true;
+  async canActivate() {
+
+    const completed = localStorage.getItem(IntroTestGuard.localStorageKey) === 'true';
 
     if (! completed) {
-      this.router.navigate(['/test']);
-    } else {
-      this.router.navigate(['/sortings']);
+      this.router.navigate(['/test'], {relativeTo:this.route});
+      return false;
     }
 
-    return ! completed;
+    return true;
   }
 }
