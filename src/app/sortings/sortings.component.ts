@@ -4,12 +4,16 @@ import {ALL, PRIMITIVES, SMARTS} from "./algorithms/sortings";
 import {sleep} from "../utils/async-utils";
 import {ArrayBuilder} from "../utils/array-builder";
 
+import * as SortingWorker from 'worker-loader!../worker.bundle.js';
+
 @Component({
   selector: 'rt-sortings',
   templateUrl: './sortings.component.html',
   styleUrls: ['./sortings.component.css']
 })
 export class SortingsComponent {
+
+  public worker: Worker = new SortingWorker();
 
   public readonly arrayTypes = [
     {id: "random", name: "Random"},
