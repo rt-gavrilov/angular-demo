@@ -27,3 +27,7 @@ export const SMARTS: Sorting[] = [
 ];
 
 export const ALL: Sorting[] = PRIMITIVES.concat(... SMARTS);
+
+export function byName(name: string): Sorting {
+  return ALL.find(value => value.name === name);
+}

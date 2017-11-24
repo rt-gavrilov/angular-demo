@@ -1,26 +1,20 @@
 import {byName} from "./algorithms/sortings";
 import {Sorting} from "./algorithms/sorting";
 
+class WorkerBase {
+
+  public start() {
+
+  }
+
+
+  public complete(result: any) {
+
+  }
+}
+
 // prevent TypeScript compile error
 const customPostMessage: any = postMessage;
-
-// Jasmine API
-// The postMessage method has a different signature
-// in the browser than in a worker.
-// Supply a custom postMessage callback method to
-// prevent TypeScript data type errors.
-let jasmineSpecPostMessageCallback: any = null;
-let jasmineSpecIsInBrowser: boolean;
-
-// Strange try / catch couple with boolean logic is to
-// suppress errors in both teh worker and browser contexts.
-// Worker throws an error for window being undefined.
-// TypeScript throws errors for compiling worker.
-try {
-  jasmineSpecIsInBrowser = ( window !== undefined );
-} catch (e) {
-  jasmineSpecIsInBrowser = false; // We are a web worker!
-}
 
 onmessage = function(event) {
 
@@ -28,8 +22,7 @@ onmessage = function(event) {
 
   sorting.run(event.data.array);
 
-  // customPostMessage(event.data.array);
-  customPostMessage('done');
+  customPostMessage(event.data.array);
 
   // worker data process
   // console.log('Web Worker ONE: Message received from main script');

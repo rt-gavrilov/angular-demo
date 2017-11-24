@@ -5,7 +5,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {LineChartModule} from "@swimlane/ngx-charts";
 import {FormsModule} from "@angular/forms";
 import {FlexLayoutModule} from "@angular/flex-layout";
-import {MatButtonModule, MatCardModule, MatInputModule, MatSelectModule} from "@angular/material";
+import {MatButtonModule, MatCardModule, MatInputModule, MatSelectModule, MatSlideToggleModule} from "@angular/material";
 
 const routes: Routes = [
   {path: '', component: SortingsComponent},
@@ -20,6 +20,7 @@ const routes: Routes = [
     MatInputModule,
     MatSelectModule,
     MatCardModule,
+    MatSlideToggleModule,
     LineChartModule,
     RouterModule.forChild(routes)
   ],

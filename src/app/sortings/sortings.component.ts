@@ -4,7 +4,8 @@ import {ALL, PRIMITIVES, SMARTS} from "./algorithms/sortings";
 import {sleep} from "../utils/async-utils";
 import {ArrayBuilder} from "../utils/array-builder";
 
-import * as SortingWorker from 'worker-loader!../worker.bundle.js';
+import * as SortingWorker from 'worker-loader!./worker.bundle.js';
+import {WorkerPool} from "./worker-pool";
 
 @Component({
   selector: 'rt-sortings',
@@ -13,7 +14,7 @@ import * as SortingWorker from 'worker-loader!../worker.bundle.js';
 })
 export class SortingsComponent {
 
-  public worker: Worker = new SortingWorker();
+  public useWorker = true;
 
   public readonly arrayTypes = [
     {id: "random", name: "Random"},
@@ -43,7 +44,46 @@ export class SortingsComponent {
     return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map( value => value * coeff);
   }
 
+  public async runWorker() {
+
+    let temp = this.sortingSetSelected.value.map( value => ({
+      name: value.name, series: []
+    }));
+
+    for (let size of this.sizes) {
+      const arrayToSort = this.createArray(size);
+
+      for (let sorting of this.sortingSetSelected.value) {
+
+        const worker: Worker = new SortingWorker();
+
+        await WorkerPool.instance.enqueue(worker);
+
+        const now = new Date().getTime();
+
+        worker.postMessage({ type: sorting.name, array: arrayToSort });
+        worker.onmessage = result => {
+          temp
+            .find( value => value.name == sorting.name )
+            .series.push({
+            name: size,
+            value: new Date().getTime() - now
+          });
+        };
+
+        // sleep(100);
+      }
+
+      this.chartData = temp.slice();
+    }
+  }
+
   public async run() {
+
+    if (this.useWorker) {
+      this.runWorker();
+      return;
+    }
 
     let temp = this.sortingSetSelected.value.map( value => ({
       name: value.name, series: []

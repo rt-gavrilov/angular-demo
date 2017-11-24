@@ -19,6 +19,10 @@
     </mat-form-field>
 
     <br>
+
+    <mat-slide-toggle color="primary" [(ngModel)]="useWorker">Run inside web-worker!</mat-slide-toggle>
+
+    <br>
     <br>
 
     <button mat-raised-button color="primary" (click)="run()">
