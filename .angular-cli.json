@@ -17,9 +17,8 @@
       "test": "test.ts",
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
-      "prefix": "app",
+      "prefix": "rt",
       "styles": [
-        "../node_modules/@covalent/core/common/platform.scss",
         "styles/material-theme.scss",
         "index.scss"
       ],
@@ -59,6 +58,9 @@
     "styleExt": "scss",
     "class": {
       "spec": false
+    },
+    "build": {
+      "namedChunks": true
     },
     "component": {}
   }

@@ -1,6 +1,9 @@
 @import '~@angular/material/theming';
 @import '~@covalent/core/theming/all-theme';
 
+$mat-font-url: '~@covalent/core/common/styles/font/';
+@include covalent-material-icons();
+
 @include mat-core();
 
 $primary: mat-palette($mat-blue, 700, 500, 900);
