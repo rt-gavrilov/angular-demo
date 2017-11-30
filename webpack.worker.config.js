@@ -1,6 +1,6 @@
 const ProgressPlugin = require('webpack/lib/ProgressPlugin');
 const { NoEmitOnErrorsPlugin } = require('webpack');
-const { AotPlugin } = require('@ngtools/webpack');
+const { AngularCompilerPlugin } = require('@ngtools/webpack');
 
 module.exports = {
   "devtool": "source-map",
@@ -55,15 +55,17 @@ module.exports = {
   "plugins": [
     new NoEmitOnErrorsPlugin(),
     new ProgressPlugin(),
-    new AotPlugin({
+    new AngularCompilerPlugin({
       "mainPath": "main.ts",
+      "platform": 0,
       "hostReplacementPaths": {
-        "environments/environment.ts": "environments/environment.ts"
+        "environments\\environment.ts": "environments\\environment.ts"
       },
-      "exclude": [],
-      "tsConfigPath": "src/tsconfig.app.json",
-      "skipCodeGeneration": true
-    })
+      "sourceMap": true,
+      "tsConfigPath": "src\\tsconfig.app.json",
+      "skipCodeGeneration": true,
+      "compilerOptions": {}
+    }),
   ],
   "node": {
     "fs": "empty",

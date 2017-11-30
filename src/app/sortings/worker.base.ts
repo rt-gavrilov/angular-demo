@@ -42,9 +42,9 @@ onmessage = function(event) {
 };
 
 // Jasmine API
-export const jasmineSpecWorkerAPI: any = {
-  onmessage: onmessage,
-  postMessage: ( cb: any ) => {
-    jasmineSpecPostMessageCallback = cb;
-  }
-};
+// export const jasmineSpecWorkerAPI: any = {
+//   onmessage: onmessage,
+//   postMessage: ( cb: any ) => {
+//     jasmineSpecPostMessageCallback = cb;
+//   }
+// };
