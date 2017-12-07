@@ -4,6 +4,8 @@ import {ALL, PRIMITIVES, SMARTS} from "./algorithms/sortings";
 import {sleep} from "../utils/async-utils";
 import {ArrayBuilder} from "../utils/array-builder";
 
+import * as threads from 'threads';
+
 import * as SortingWorker from 'worker-loader!./worker.bundle.js';
 import {WorkerPool} from "./worker-pool";
 
@@ -13,6 +15,10 @@ import {WorkerPool} from "./worker-pool";
   styleUrls: ['./sortings.component.css']
 })
 export class SortingsComponent {
+
+  constructor() {
+    console.log("threads", threads);
+  }
 
   public useWorker = true;
 
@@ -44,6 +50,21 @@ export class SortingsComponent {
     return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map( value => value * coeff);
   }
 
+  public async runWorker1() {
+    const thread = threads.spawn(function(input, done) {
+      // Everything we do here will be run in parallel in another execution context.
+      // Remember that this function will be executed in the thread's context,
+      // so you cannot reference any value of the surrounding code.
+      done({ string : input.string, integer : parseInt(input.string) });
+    });
+
+    thread
+      .send({ do : 'Something awesome!' })
+      .on('message', function(message) {
+        console.log('worker.js replied:', message);
+      });
+  }
+
   public async runWorker() {
 
     let temp = this.sortingSetSelected.value.map( value => ({
@@ -69,12 +90,12 @@ export class SortingsComponent {
             name: size,
             value: new Date().getTime() - now
           });
-        };
 
-        // sleep(100);
+          this.chartData = temp.slice();
+        };
       }
 
-      this.chartData = temp.slice();
+      // this.chartData = temp.slice();
     }
   }
 
