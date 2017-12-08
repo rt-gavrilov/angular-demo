@@ -19,7 +19,9 @@
     "import-blacklist": [
       true,
       "rxjs",
-      "rxjs/Rx"
+      "rxjs/operators",
+      "@angular/cdk",
+      "@angular/material"
     ],
     "import-spacing": true,
     "indent": [

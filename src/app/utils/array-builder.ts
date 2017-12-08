@@ -43,14 +43,14 @@ export class ArrayBuilder {
         continue;
       }
 
-      let index = Math.round(Math.random() * (this.internal.length - 1));
+      const index = Math.round(Math.random() * (this.internal.length - 1));
       this.swap(i, index);
     }
     return this;
   }
 
   private swap(i: number, j: number) {
-      let temp = this.internal[i];
+      const temp = this.internal[i];
       this.internal[i] = this.internal[j];
       this.internal[j] = temp;
   }

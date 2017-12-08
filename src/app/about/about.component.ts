@@ -1,8 +1,8 @@
-import {Component} from "@angular/core";
-import {AppearAnimation} from "../utils/appear.animation";
+import {Component} from '@angular/core';
+import {AppearAnimation} from '../utils/appear.animation';
 
 @Component({
-  selector: 'app-about',
+  selector: 'rt-about',
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.css'],
   animations: [

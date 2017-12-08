@@ -2,10 +2,10 @@ import {Component} from '@angular/core';
 import {TdBounceAnimation, TdFadeInOutAnimation, TdHeadshakeAnimation, TdJelloAnimation} from '@covalent/core';
 import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/operator/throttleTime';
-import {GrayOutAnimation} from "../utils/gray-out.animation";
+import {GrayOutAnimation} from '../utils/gray-out.animation';
 import * as lodash from 'lodash';
-import {IntroTestGuard} from "./intro-test.guard";
-import {Router} from "@angular/router";
+import {IntroTestGuard} from './intro-test.guard';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'rt-intro-test',
@@ -76,9 +76,9 @@ class Framework {
 
       const random = Math.random();
 
-      this.jello = random <= 1/3;
-      this.headshake = random > 1/3 && random <= 2/3;
-      this.bounce = random > 2/3;
+      this.jello = random <= 1 / 3;
+      this.headshake = random > 1 / 3 && random <= 2 / 3;
+      this.bounce = random > 2 / 3;
     });
   }
 

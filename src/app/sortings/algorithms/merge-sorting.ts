@@ -1,8 +1,8 @@
-import {Sorting} from "./sorting";
+import {Sorting} from './sorting';
 
 export class MergeSorting extends Sorting {
 
-  readonly name = "Merge";
+  readonly name = 'Merge';
 
   private workspace: number[];
   private array: number[];
@@ -19,7 +19,7 @@ export class MergeSorting extends Sorting {
 
   private sortRange(from: number, to: number) {
 
-    if (to == from) {
+    if (to === from) {
       return;
     }
 

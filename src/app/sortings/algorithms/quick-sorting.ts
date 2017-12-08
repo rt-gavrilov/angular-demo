@@ -1,8 +1,8 @@
-import {Sorting} from "./sorting";
+import {Sorting} from './sorting';
 
 export class QuickSorting extends Sorting {
 
-  readonly name = "Quick";
+  readonly name = 'Quick';
 
   run(array: number[]) {
     this.sortInterval(array, 0, array.length - 1);

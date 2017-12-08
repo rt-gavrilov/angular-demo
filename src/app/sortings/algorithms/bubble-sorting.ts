@@ -1,8 +1,8 @@
-import {Sorting} from "./sorting";
+import {Sorting} from './sorting';
 
 export class BubbleSorting extends Sorting {
 
-  readonly name = "Bubble";
+  readonly name = 'Bubble';
 
   run(array: number[]) {
     for (let i = array.length - 1; i > 0; i--) {

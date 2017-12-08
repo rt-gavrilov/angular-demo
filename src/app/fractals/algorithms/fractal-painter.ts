@@ -1,5 +1,5 @@
-import {Rectangle} from "../../utils/rectangle";
-import {FractalSet} from "./fractal-set";
+import {Rectangle} from '../../utils/rectangle';
+import {FractalSet} from './fractal-set';
 
 export class FractalPainter {
 

@@ -1,8 +1,8 @@
-import {Sorting} from "./sorting";
+import {Sorting} from './sorting';
 
 export class HeapSorting extends Sorting {
 
-  readonly name = "Heap";
+  readonly name = 'Heap';
 
   private heapSize: number;
 
@@ -27,8 +27,8 @@ export class HeapSorting extends Sorting {
 
   private heapify(array: number[], index: number = 0) {
 
-    let leftIndex = 2 * index + 1;
-    let rightIndex = 2 * index + 2;
+    const leftIndex = 2 * index + 1;
+    const rightIndex = 2 * index + 2;
 
     if (leftIndex >= this.heapSize) {
       return;
@@ -38,7 +38,7 @@ export class HeapSorting extends Sorting {
     if (rightIndex >= this.heapSize) {
       maxIndex = leftIndex;
     } else {
-      maxIndex = array[leftIndex] > array[rightIndex] ? leftIndex : rightIndex
+      maxIndex = array[leftIndex] > array[rightIndex] ? leftIndex : rightIndex;
     }
 
     if (array[index] < array[maxIndex]) {

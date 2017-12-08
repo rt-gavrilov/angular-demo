@@ -1,5 +1,5 @@
-import {Component, ViewChild, Output, EventEmitter} from "@angular/core";
-import {Rectangle} from "../../../utils/rectangle";
+import {Component, EventEmitter, Output, ViewChild} from '@angular/core';
+import {Rectangle} from '../../../utils/rectangle';
 
 @Component({
   selector: 'rt-selectable-area',

@@ -1,9 +1,9 @@
-import {Directive, ElementRef, EventEmitter, HostListener, OnInit, Output} from "@angular/core";
-import {sleep} from "./async-utils";
-import {Rectangle} from "./rectangle";
+import {Directive, ElementRef, EventEmitter, HostListener, OnInit, Output} from '@angular/core';
+import {sleep} from './async-utils';
+import {Rectangle} from './rectangle';
 
 @Directive({
-  selector: "[resizeDetector]"
+  selector: '[resizeDetector]'
 })
 export class ResizeDetectorDirective implements OnInit {
 
@@ -16,7 +16,7 @@ export class ResizeDetectorDirective implements OnInit {
   @Output()
   public resize = new EventEmitter<{ width: number, height: number }>();
 
-  @HostListener("window:resize")
+  @HostListener('window:resize')
   public async onResize() {
 
     const bounds = this.host.nativeElement.getBoundingClientRect();

@@ -1,22 +1,22 @@
-import {Sorting} from "./sorting";
+import {Sorting} from './sorting';
 
 export class InsertionSorting extends Sorting {
 
-  readonly name = "Insertion";
+  readonly name = 'Insertion';
 
   run(array: number[]) {
     for (let i = 1; i < array.length; i++) {
 
-      let valueToInsert = array[i];
+      const valueToInsert = array[i];
       let indexToInsert = i;
 
       for (let j = i; j > 0; j--) {
 
-        if (array[j-1] <= valueToInsert) {
+        if (array[j - 1] <= valueToInsert) {
           break;
         }
 
-        array[j] = array[j-1];
+        array[j] = array[j - 1];
         indexToInsert --;
       }
 

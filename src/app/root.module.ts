@@ -3,10 +3,12 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {IntroTestGuard} from './intro-test/intro-test.guard';
-import {MatButtonModule, MatIconModule, MatToolbarModule} from "@angular/material";
-import {RouterModule, Routes} from "@angular/router";
-import {FlexLayoutModule} from "@angular/flex-layout";
-import {RootComponent} from "./root.component";
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {RouterModule, Routes} from '@angular/router';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {RootComponent} from './root.component';
 
 const routes: Routes = [
   {path: '', canActivate: [IntroTestGuard], component: AppComponent, children: [

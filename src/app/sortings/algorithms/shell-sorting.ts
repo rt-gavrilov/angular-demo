@@ -1,8 +1,8 @@
-import {Sorting} from "./sorting";
+import {Sorting} from './sorting';
 
 export class ShellSorting extends Sorting {
 
-  readonly name = "Shell";
+  readonly name = 'Shell';
 
   run(array: number[]) {
     let step = 1;
@@ -22,12 +22,12 @@ export class ShellSorting extends Sorting {
 
     for (let i = from + step; i < array.length; i += step) {
 
-      let valueToInsert = array[i];
+      const valueToInsert = array[i];
       let indexToInsert = i;
 
       for (let j = i; j > from; j -= step) {
-        if (array[j-step] > valueToInsert) {
-          array[j] = array[j-step];
+        if (array[j - step] > valueToInsert) {
+          array[j] = array[j - step];
           indexToInsert -= step;
         } else {
           break;

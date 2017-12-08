@@ -1,9 +1,9 @@
-import {FractalSet} from "./fractal-set";
-import {Rectangle} from "../../utils/rectangle";
+import {FractalSet} from './fractal-set';
+import {Rectangle} from '../../utils/rectangle';
 
 export class MandelbrotFractalSet extends FractalSet {
 
-  public readonly name = "Mandelbrot";
+  public readonly name = 'Mandelbrot';
 
   public readonly initialArea = new Rectangle(-2, -2, 1, 2);
 

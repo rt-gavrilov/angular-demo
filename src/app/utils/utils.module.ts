@@ -1,6 +1,6 @@
-import {NgModule} from "@angular/core";
-import {CommonModule} from "@angular/common";
-import {ResizeDetectorDirective} from "./resize-detector.directive";
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {ResizeDetectorDirective} from './resize-detector.directive';
 
 @NgModule({
   imports: [

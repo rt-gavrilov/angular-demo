@@ -1,7 +1,7 @@
-import {Component} from "@angular/core";
-import {FractalSet} from "../algorithms/fractal-set";
-import {FRACTALS_AVAILABLE} from "../algorithms/fractals-available";
-import {AppearAnimation} from "../../utils/appear.animation";
+import {Component} from '@angular/core';
+import {FractalSet} from '../algorithms/fractal-set';
+import {FRACTALS_AVAILABLE} from '../algorithms/fractals-available';
+import {AppearAnimation} from '../../utils/appear.animation';
 
 @Component({
   selector: 'rt-showroom',

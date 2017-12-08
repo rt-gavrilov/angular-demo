@@ -1,7 +1,7 @@
-import {Component, Input, OnChanges, ViewChild} from "@angular/core";
-import {FractalPainter} from "../algorithms/fractal-painter";
-import {FractalSet} from "../algorithms/fractal-set";
-import {Rectangle} from "../../utils/rectangle";
+import {Component, Input, OnChanges, ViewChild} from '@angular/core';
+import {FractalPainter} from '../algorithms/fractal-painter';
+import {FractalSet} from '../algorithms/fractal-set';
+import {Rectangle} from '../../utils/rectangle';
 
 @Component({
   selector: 'rt-fractal',
@@ -34,7 +34,7 @@ export class FractalComponent implements OnChanges {
 
     this.canvas
       .nativeElement
-      .getContext("2d")
+      .getContext('2d')
       .putImageData(imageData, 0, 0);
   }
 

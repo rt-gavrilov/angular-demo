@@ -1,8 +1,8 @@
-import {Sorting} from "./sorting";
+import {Sorting} from './sorting';
 
 export class StrangeSorting extends Sorting {
 
-  readonly name = "Strange";
+  readonly name = 'Strange';
 
   run(array: number[]) {
     for (let i = 0; i < array.length; i++) {

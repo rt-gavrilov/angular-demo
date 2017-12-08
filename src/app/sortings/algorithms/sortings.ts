@@ -1,14 +1,14 @@
-import {Sorting} from "./sorting";
-import {StrangeSorting} from "./strange-sorting";
-import {BubbleSorting} from "./bubble-sorting";
-import {ShakerSorting} from "./shaker-sorting";
-import {SelectionSorting} from "./selection-sorting";
-import {InsertionSorting} from "./insertion-sorting";
-import {GnomeSorting} from "./gnome-sorting";
-import {HeapSorting} from "./heap-sorting";
-import {QuickSorting} from "./quick-sorting";
-import {MergeSorting} from "./merge-sorting";
-import {ShellSorting} from "./shell-sorting";
+import {Sorting} from './sorting';
+import {StrangeSorting} from './strange-sorting';
+import {BubbleSorting} from './bubble-sorting';
+import {ShakerSorting} from './shaker-sorting';
+import {SelectionSorting} from './selection-sorting';
+import {InsertionSorting} from './insertion-sorting';
+import {GnomeSorting} from './gnome-sorting';
+import {HeapSorting} from './heap-sorting';
+import {QuickSorting} from './quick-sorting';
+import {MergeSorting} from './merge-sorting';
+import {ShellSorting} from './shell-sorting';
 
 export const PRIMITIVES: Sorting[] = [
   new StrangeSorting(),
@@ -26,4 +26,4 @@ export const SMARTS: Sorting[] = [
   new ShellSorting()
 ];
 
-export const ALL: Sorting[] = PRIMITIVES.concat(... SMARTS);
+export const ALL: Sorting[] = [... PRIMITIVES, ... SMARTS];

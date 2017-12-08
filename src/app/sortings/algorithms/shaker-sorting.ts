@@ -1,8 +1,8 @@
-import {Sorting} from "./sorting";
+import {Sorting} from './sorting';
 
 export class ShakerSorting extends Sorting {
 
-  readonly name = "Shaker";
+  readonly name = 'Shaker';
 
   run(array: number[]) {
     for (let right = array.length - 1, left = 0; right > 0; right--, left++) {
