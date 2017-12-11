@@ -14,18 +14,33 @@ export class SelectableAreaComponent {
 
   public selectedArea: Rectangle;
 
+  private widthToHeightRate: number;
+
   private get canvasBounds() {
     return this.container.nativeElement.getBoundingClientRect();
   }
 
-  public onMouseDown(event) {
+  public onMouseDown(event: MouseEvent) {
+
+    if (event.button !== 2) {
+      return;
+    }
+
+    this.widthToHeightRate = this.canvasBounds.width / this.canvasBounds.height;
+
+    console.log("RATE", this.widthToHeightRate);
+
     this.selectedArea = new Rectangle(
       event.pageX - this.canvasBounds.left,
       event.pageY - this.canvasBounds.top
     );
   }
 
-  public onMouseUp(event) {
+  public onMouseUp(event: MouseEvent) {
+
+    if (event.button !== 2) {
+      return;
+    }
 
     const width = this.canvasBounds.right - this.canvasBounds.left;
     const height = this.canvasBounds.bottom - this.canvasBounds.top;
@@ -42,17 +57,19 @@ export class SelectableAreaComponent {
     this.selectedArea = null;
   }
 
-  public onMouseMove(event) {
+  public onMouseMove(event: MouseEvent) {
 
     if ( ! this.selectedArea) {
       return;
     }
 
-    this.selectedArea.right = event.pageX - this.canvasBounds.left;
-    this.selectedArea.bottom = event.pageY - this.canvasBounds.top;
-  }
+    const dx = event.pageX - this.canvasBounds.left;
+    const dy = dx / this.widthToHeightRate - this.canvasBounds.top;
 
-  onMouseWheel(event) {
+    this.selectedArea.right = dx;
+    this.selectedArea.bottom = dy;
 
+    // this.selectedArea.right = event.pageX - this.canvasBounds.left;
+    // this.selectedArea.bottom = event.pageY - this.canvasBounds.top;
   }
 }

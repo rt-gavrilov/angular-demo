@@ -15,10 +15,23 @@ export class Rectangle {
   }
 
   public zoom(coeff: number) {
-    this.left += this.width * coeff / 2;
-    this.right -= this.width * coeff / 2;
-    this.top += this.height * coeff / 2;
-    this.bottom -= this.height * coeff / 2;
+
+    const prevWidth = this.width;
+    const prevHeight = this.height;
+
+    const newWidth = this.width / coeff;
+    const newHeight = this.height / coeff;
+
+    return new Rectangle(
+      this.left + (newWidth - prevWidth) / -2,
+      this.top + (newHeight - prevHeight) / -2,
+      this.right - (newWidth - prevWidth) / -2,
+      this.bottom - (newHeight - prevHeight) / -2
+    );
+  }
+
+  public clone(): Rectangle {
+    return new Rectangle(this.left, this.top, this.right, this.bottom);
   }
 
   public equals(to: Rectangle): boolean {

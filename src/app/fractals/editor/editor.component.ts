@@ -38,4 +38,16 @@ export class EditorComponent {
     console.log('AREA CHANGE AFTER', this.area);
 
   }
+
+  public zoomIn() {
+    this.area = this.area.zoom(1.5);
+  }
+
+  public zoomOut() {
+    this.area = this.area.zoom(1 / 1.5);
+  }
+
+  public resetZoom() {
+    this.area = this.fractal.initialArea;
+  }
 }

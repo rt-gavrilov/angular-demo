@@ -1,0 +1,11 @@
+:host {
+  position: relative;
+  display: block;
+}
+
+.actions {
+  position: absolute;
+  left: 25px;
+  top: 25px;
+  z-index: 100;
+}

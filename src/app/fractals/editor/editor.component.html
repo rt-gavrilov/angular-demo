@@ -1,10 +1,27 @@
+<div class="actions"><div fxLayout="column" fxLayoutGap="10px">
+  <button mat-mini-fab color="primary" (click)="zoomIn()" matTooltip="Zoom in 50%" matTooltipPosition="right">
+    <mat-icon>zoom_in</mat-icon>
+  </button>
+  <button mat-mini-fab color="primary" (click)="zoomOut()" matTooltip="Zoom out 50%" matTooltipPosition="right">
+    <mat-icon>zoom_out</mat-icon>
+  </button>
+  <button mat-mini-fab color="primary" (click)="resetZoom()" matTooltip="Reset zoom" matTooltipPosition="right">
+    <mat-icon>find_replace</mat-icon>
+  </button>
+
+  <mat-icon color="primary" matTooltip="Select area to zoom into it" matTooltipPosition="right">
+    help_outline
+  </mat-icon>
+</div></div>
+
 <rt-fractal
   fxFill
   [painter]="fractal"
   [area]="area">
 </rt-fractal>
 
-<rt-selectable-area
-  style="width: 100%; height: 100%; position: absolute; top: 0; left: 0;"
-  (select)="onAreaSelect($event)">
-</rt-selectable-area>
+<!--<rt-selectable-area-->
+  <!--fxFill-->
+  <!--style="position: absolute; top: 0; left: 0; right: 0; bottom: 0;"-->
+  <!--(select)="onAreaSelect($event)">-->
+<!--</rt-selectable-area>-->
