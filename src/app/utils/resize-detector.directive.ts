@@ -21,6 +21,8 @@ export class ResizeDetectorDirective implements OnInit {
 
     const bounds = this.host.nativeElement.getBoundingClientRect();
 
+    console.log("bounds", bounds);
+
     const newRect = new Rectangle(0, 0, bounds.width, bounds.height);
 
     if ( newRect.equals(this.prevValue)) {
