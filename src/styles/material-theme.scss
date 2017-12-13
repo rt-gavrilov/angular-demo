@@ -1,9 +1,6 @@
 @import '~@angular/material/theming';
 @import '~@covalent/core/theming/all-theme';
 
-$mat-font-url: '~@covalent/core/common/styles/font/';
-@include covalent-material-icons();
-
 @include mat-core();
 
 $primary: mat-palette($mat-blue, 700, 500, 900);
@@ -14,6 +11,8 @@ $theme: mat-light-theme($primary, $accent, $warn);
 
 @include angular-material-theme($theme);
 @include covalent-theme($theme);
+
+@import '../../node_modules/@covalent/core/common/material-icons.css';
 
 @import 'mat-card.custom';
 @import 'mat-form-field.custom';
