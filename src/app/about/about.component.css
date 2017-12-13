@@ -1,9 +1,5 @@
-.icon-wrapper {
-  display: flex;
-  cursor: pointer;
-  margin: 10px;
-  width: 150px;
-  height: 150px;
+img {
+  width: 100%;
 }
 
 .small-icon-wrapper {

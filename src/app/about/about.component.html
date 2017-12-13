@@ -1,45 +1,44 @@
-<mat-card style="margin: 16px;" fxLayout>
+<mat-card style="max-width: 800px; margin: 16px auto;">
 
-  <div>
-    <p>This demo is built on <a href="https://angular.io" target="_blank">Angular</a> platform and written fully in TypeScript</p>
-    <p>As a component set it uses excelent <a href="https://github.com/angular/material2">Angular Material</a> and its awesome extension - <a href="">Covalent</a> by Teradata guys</p>
-    <p>Flexbox via <a href="https://github.com/angular/flex-layout">Angular Flex Layout</a></p>
-    <p>The CLI</p>
-    <p>Also NGX Charts help me a lot in painting</p>
-    <p>Internally it also uses canvas, web workers, svg, local storage...</p>
+  <div fxLayout="row wrap" fxLayoutAlign="center">
+    <mat-card fxLayoutAlign="center center" class="small-icon-wrapper" [@appear]="{value: true, params: {delay: 500}}">
+      <img src="assets/angular.logo.png">
+    </mat-card>
+    <mat-card fxLayoutAlign="center center" class="small-icon-wrapper" [@appear]="{value: true, params: {delay: 750}}">
+      <img src="assets/material-design.logo.svg">
+    </mat-card>
+    <mat-card fxLayoutAlign="center center" class="small-icon-wrapper" [@appear]="{value: true, params: {delay: 1000}}">
+      <img src="assets/covalent.logo.svg">
+    </mat-card>
+    <mat-card fxLayoutAlign="center center" class="small-icon-wrapper" [@appear]="{value: true, params: {delay: 1250}}">
+      <img src="assets/typescript.logo.png">
+    </mat-card>
+    <mat-card fxLayoutAlign="center center" class="small-icon-wrapper" [@appear]="{value: true, params: {delay: 1500}}">
+      <img src="assets/sass.logo.png">
+    </mat-card>
+    <mat-card fxLayoutAlign="center center" class="small-icon-wrapper" [@appear]="{value: true, params: {delay: 1750}}">
+      <img src="assets/npm.logo.png">
+    </mat-card>
   </div>
 
-  <div>
-    <div fxLayout="row" fxLayoutAlign="start">
-      <mat-card fxFlex="150px" fxLayoutAlign="center center" class="icon-wrapper" [@appear]="{value: true, params: {delay: 1000}}">
-        <img style="width: 100%;" src="assets/angular.logo.png">
-      </mat-card>
-      <mat-card fxFlex="150px" fxLayoutAlign="center center" class="icon-wrapper" [@appear]="{value: true, params: {delay: 1250}}">
-        <img style="width: 100%;" src="assets/typescript.logo.png">
-      </mat-card>
-      <mat-card fxFlex="150px" fxLayoutAlign="center center" class="icon-wrapper" [@appear]="{value: true, params: {delay: 1500}}">
-        <img style="width: 100%;" src="assets/covalent.logo.svg">
-      </mat-card>
-      <mat-card fxFlex="150px" fxLayoutAlign="center center" class="icon-wrapper" [@appear]="{value: true, params: {delay: 1750}}">
-        <img style="width: 100%;" src="assets/material-design.logo.svg">
-      </mat-card>
-    </div>
+  <p>
+    This demo is built on <a href="https://angular.io" target="_blank">Angular</a> platform
+    and written fully in <a href="http://www.typescriptlang.org" target="_blank">TypeScript</a>
+  </p>
+  <p>
+    As a component set it utilizes the power of brilliant <a href="https://material.angular.io/" target="_blank">Angular Material</a>
+    and its awesome extension - <a href="https://teradata.github.io/covalent" target="_blank">Covalent</a>
+  </p>
+  <p>Then flexbox via <a href="https://github.com/angular/flex-layout" target="_blank">Angular Flex Layout</a>
+    and finally <a href="https://github.com/swimlane/ngx-charts" target="_blank">NGX Charts</a> - a free charting engine
+  </p>
 
-    <div fxLayout="row">
-      <mat-card fxLayoutAlign="center center" class="small-icon-wrapper" [@appear]="{value: true, params: {delay: 2000}}">
-        <img style="width: 100%;" src="assets/sass.logo.png">
-      </mat-card>
-      <mat-card fxLayoutAlign="center center" class="small-icon-wrapper" [@appear]="{value: true, params: {delay: 2250}}">
-        <img style="width: 100%;" src="assets/npm.logo.png">
-      </mat-card>
-      <mat-card fxLayoutAlign="center center" class="small-icon-wrapper" [@appear]="{value: true, params: {delay: 2500}}">
-        <img style="height: 100%;" src="assets/gulp.logo.svg">
-      </mat-card>
-      <mat-card fxLayoutAlign="center center" class="small-icon-wrapper" [@appear]="{value: true, params: {delay: 2750}}">
-        <img style="width: 100%;" src="assets/webpack.logo.svg">
-      </mat-card>
-    </div>
-  </div>
+  <p>It's very much in progress, but there's something to show at the moment</p>
+
+  <p>So, what's included for now:</p>
+  <ul>
+    <li><a routerLink="/sortings">Real-time sorting algorithms comparison</a></li>
+    <li><a routerLink="/fractals">Simple fractal painter</a></li>
+  </ul>
+
 </mat-card>
-
-<!--<p>So, what's included:</p>-->
