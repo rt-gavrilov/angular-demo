@@ -6,7 +6,7 @@ import {AppearAnimation} from '../utils/appear.animation';
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.css'],
   animations: [
-    AppearAnimation('right')
+    AppearAnimation('top')
   ]
 })
 export class AboutComponent {
