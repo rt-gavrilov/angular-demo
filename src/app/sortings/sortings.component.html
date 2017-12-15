@@ -27,11 +27,11 @@
 
   </mat-card>
 
-  <!-- workaround to make chart resize properly -->
-  <mat-card fxFlex="0 0 calc(100% - 250px - 16px)">
+  <mat-card fxFlex style="overflow: hidden;">
 
-    <div fxFill>
+    <div fxLayout="row" style="height: 100%;">
       <ngx-charts-line-chart
+        style="height: 100px;"
         *ngIf="chartData"
         [scheme]="colorScheme"
         [results]="chartData"

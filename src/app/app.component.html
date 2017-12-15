@@ -1,45 +1,43 @@
-<!--<div fxLayout="column" fxFill>-->
+<div fxLayout="column" style="height: 100%;">
 
-<mat-toolbar color="primary" class="mat-elevation-z5">
+  <mat-toolbar fxFlex="none" color="primary" class="mat-elevation-z5">
 
-  <div fxLayout="row" fxLayoutAlign="stretch center" fxFill>
+    <div fxLayout="row" fxLayoutAlign="stretch center" fxFill>
 
-    <a fxFlex="none" routerLink="/about" mat-button routerLinkActive="active">
-      <p>
-        <mat-icon class="mat-36">home</mat-icon>
-      </p>
-    </a>
+      <a fxFlex="none" routerLink="/about" mat-button routerLinkActive="active">
+        <p>
+          <mat-icon class="mat-36">home</mat-icon>
+        </p>
+      </a>
 
-    <div fxFlex="stretch"></div>
+      <div fxFlex="stretch"></div>
 
-    <a fxFlex="none" mat-button routerLink="/sortings" routerLinkActive="active">
-      <p>
-        <mat-icon class="md-24" style="transform: scale(-1,-1);">sort</mat-icon>
-        <span>Sortings</span>
-      </p>
-    </a>
+      <a fxFlex="none" mat-button routerLink="/sortings" routerLinkActive="active">
+        <p>
+          <mat-icon class="md-24" style="transform: scale(-1,-1);">sort</mat-icon>
+          <span>Sortings</span>
+        </p>
+      </a>
 
-    <a fxFlex="none" mat-button routerLink="/fractals" routerLinkActive="active">
-      <p>
-        <mat-icon>fingerprint</mat-icon>
-        Fractals
-      </p>
-    </a>
+      <a fxFlex="none" mat-button routerLink="/fractals" routerLinkActive="active">
+        <p>
+          <mat-icon>fingerprint</mat-icon>
+          Fractals
+        </p>
+      </a>
 
-    <div fxFlex="stretch"></div>
+      <div fxFlex="stretch"></div>
 
-    <a fxFlex="none" mat-button href="https://github.com/rt-gavrilov/angular-demo" target="_blank">
-      <p>
-        <img src="assets/github.logo.png" style="width: 32px; height: 32px; filter: invert(100%);">
-      </p>
-    </a>
+      <a fxFlex="none" mat-button href="https://github.com/rt-gavrilov/angular-demo" target="_blank">
+        <p>
+          <img src="assets/github.logo.png" style="width: 32px; height: 32px; filter: invert(100%);">
+        </p>
+      </a>
+    </div>
+  </mat-toolbar>
+
+  <div fxFlex="1 1 100%">
+    <router-outlet></router-outlet>
   </div>
-</mat-toolbar>
 
-<!--<div style="min-height: calc(100vh - 32px);">-->
-<!--<div fxFlex>-->
-<!--<div fxFlex="1 1 100%">-->
-  <router-outlet></router-outlet>
-<!--</div>-->
-
-<!--</div>-->
+</div>
