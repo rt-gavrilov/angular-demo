@@ -1,18 +1,20 @@
-<div class="actions"><div fxLayout="column" fxLayoutGap="10px">
-  <button mat-mini-fab color="primary" (click)="zoomIn()" matTooltip="Zoom in 50%" matTooltipPosition="right">
-    <mat-icon>zoom_in</mat-icon>
-  </button>
-  <button mat-mini-fab color="primary" (click)="zoomOut()" matTooltip="Zoom out 50%" matTooltipPosition="right">
-    <mat-icon>zoom_out</mat-icon>
-  </button>
-  <button mat-mini-fab color="primary" (click)="resetZoom()" matTooltip="Reset zoom" matTooltipPosition="right">
-    <mat-icon>find_replace</mat-icon>
-  </button>
+<div class="actions">
+  <div fxLayout="column" fxLayoutGap="10px">
+    <button mat-mini-fab color="primary" (click)="zoomIn()" matTooltip="Zoom in 50%" matTooltipPosition="right">
+      <mat-icon>zoom_in</mat-icon>
+    </button>
+    <button mat-mini-fab color="primary" (click)="zoomOut()" matTooltip="Zoom out 50%" matTooltipPosition="right">
+      <mat-icon>zoom_out</mat-icon>
+    </button>
+    <button mat-mini-fab color="primary" (click)="resetZoom()" matTooltip="Reset zoom" matTooltipPosition="right">
+      <mat-icon>find_replace</mat-icon>
+    </button>
 
-  <mat-icon color="primary" matTooltip="Select area to zoom into it" matTooltipPosition="right">
-    help_outline
-  </mat-icon>
-</div></div>
+    <!--<mat-icon color="primary" matTooltip="Select area to zoom into it" matTooltipPosition="right">-->
+      <!--help_outline-->
+    <!--</mat-icon>-->
+  </div>
+</div>
 
 <rt-fractal
   fxFill

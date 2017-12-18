@@ -23,11 +23,26 @@ export class FractalComponent implements OnChanges {
       return;
     }
 
-    const imageData = new FractalPainter(this.painter)
-      .paint(
-        this.area || this.painter.initialArea,
-        this.bounds.width, this.bounds.height
-      );
+    const area = this.area.clone();
+
+    const boundsProp = this.bounds.width / this.bounds.height;
+    const areaProp = area.width / area.height;
+
+    if (boundsProp > areaProp) {
+      const areaHeight = area.height;
+      const newAreaHeight = area.height * areaProp / boundsProp;
+
+      area.top += (newAreaHeight - areaHeight) / - 2;
+      area.bottom -= (newAreaHeight - areaHeight) / - 2;
+    } else {
+      const areaWidth = this.area.width;
+      const newAreaWidth = this.area.width * boundsProp / areaProp;
+
+      area.left += (newAreaWidth - areaWidth) / 2;
+      area.right -= (newAreaWidth - areaWidth) / 2;
+    }
+
+    const imageData = new FractalPainter(this.painter).paint(area, this.bounds.width, this.bounds.height);
 
     this.canvas.nativeElement.width = this.bounds.width;
     this.canvas.nativeElement.height = this.bounds.height;
@@ -44,6 +59,7 @@ export class FractalComponent implements OnChanges {
   }
 
   public ngOnChanges() {
+    this.area = this.area || this.painter.initialArea;
     this.redraw();
   }
 }

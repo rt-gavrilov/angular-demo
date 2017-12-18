@@ -16,29 +16,24 @@ export class FractalPainter {
     const dx = area.width / width;
     const dy = area.height / height;
 
-    let min = 255;
-    let max = 0;
+    const iterations = 128;
 
     for (let j = 0, y = area.top; j < height; j++, y += dy) {
       for (let i = 0, x = area.left; i < width; i++, x += dx) {
 
-        const pointValue = this.strategy.getPoint(x, y, 255);
+        const pointValue: number = this.strategy.getPoint(x, y, iterations);
 
-        if (pointValue > max) {
-          max = pointValue;
-        }
-
-        if (pointValue < min) {
-          min = pointValue;
-        }
-
-        result.data[position++] = pointValue % 256;
-        result.data[position++] = pointValue % 128;
-        result.data[position++] = pointValue % 64;
+        result.data[position++] = 8 * pointValue;
+        result.data[position++] = 4 * pointValue;
+        result.data[position++] = 2 * pointValue;
         result.data[position++] = 255;
       }
     }
 
     return result;
+  }
+
+  private calcColor(iterations: number): number {
+    return 0;
   }
 }

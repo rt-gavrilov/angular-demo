@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, HostBinding} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FRACTALS_AVAILABLE} from '../algorithms/fractals-available';
 import {FractalSet} from '../algorithms/fractal-set';
@@ -10,6 +10,25 @@ import {Rectangle} from '../../utils/rectangle';
   styleUrls: ['./editor.component.css']
 })
 export class EditorComponent {
+
+  public blocks: number[][] = [];
+
+  public onResize(event) {
+    const {width, height} = event;
+
+    const blockSize = 100;
+
+    const numBlocksHoriz = Math.ceil(width / blockSize);
+    const numBlocksVert = Math.ceil(height / blockSize);
+
+    console.log(numBlocksHoriz, numBlocksVert);
+
+    for (let i = 0; i < numBlocksHoriz; i++) {
+      for (let j = 0; j < numBlocksVert; j++) {
+        // blocks[i][j]
+      }
+    }
+  }
 
   constructor(
     private route: ActivatedRoute

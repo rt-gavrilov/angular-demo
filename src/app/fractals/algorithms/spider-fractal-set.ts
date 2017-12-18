@@ -7,7 +7,7 @@ export class SpiderFractalSet extends FractalSet {
 
   public readonly initialArea = new Rectangle(-2, -2, 1, 2);
 
-  public getPoint(x: number, y: number): number {
+  public getPoint(x: number, y: number, max: number = 256): number {
 
     let IterCounter = 1;
     let ReComplex0 = x;
@@ -17,7 +17,7 @@ export class SpiderFractalSet extends FractalSet {
     let ReComplex2 = x;
     let ImComplex2 = y;
 
-    while (ReComplex0 * ReComplex0 + ImComplex0 * ImComplex0 <= 4.0 && IterCounter < 100) {
+    while (ReComplex0 * ReComplex0 + ImComplex0 * ImComplex0 <= 4.0 && IterCounter < max) {
       IterCounter++;
       ReComplex1 = ReComplex0 * ReComplex0 - ImComplex0 * ImComplex0 + ReComplex2;
       ImComplex1 = 2.0 * ReComplex0 * ImComplex0 + ImComplex2;
