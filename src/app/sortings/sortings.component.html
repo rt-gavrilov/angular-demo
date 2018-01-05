@@ -1,6 +1,6 @@
 <div fxLayout="row" fxFill fxLayoutGap="16px" style="padding: 16px;" fxLayoutAlign="stretch stretch">
 
-  <mat-card fxFlex="250px" fxLayout="column" fxLayoutAlign="start stretch">
+  <mat-card fxFlexAlign="start" fxFlex="250px" fxLayout="column" fxLayoutAlign="start stretch">
 
     <h3>Sorting algorithms<br>real-time comparison</h3>
 
@@ -27,11 +27,11 @@
 
   </mat-card>
 
-  <!-- workaround to make chart resize properly -->
-  <mat-card fxFlex="0 0 calc(100% - 250px - 16px)">
+  <mat-card fxFlex style="overflow: hidden;">
 
-    <div fxFill>
+    <div fxLayout="row" style="height: 100%;">
       <ngx-charts-line-chart
+        style="height: 100px;"
         *ngIf="chartData"
         [scheme]="colorScheme"
         [results]="chartData"
