@@ -11,6 +11,9 @@ import {Rectangle} from '../../utils/rectangle';
 })
 export class EditorComponent {
 
+  public fractal: FractalSet;
+  public area: Rectangle;
+
   constructor(
     private route: ActivatedRoute
   ) {
@@ -21,21 +24,24 @@ export class EditorComponent {
     this.area = this.fractal.initialArea;
   }
 
-  public fractal: FractalSet;
-  public area: Rectangle;
-
-  onAreaSelect(value: Rectangle) {
-
-    console.log('AREA CHANGE BEFORE', this.area);
-
+  public onAreaSelect(value: Rectangle) {
     this.area = new Rectangle(
-      value.left * this.area.width + this.area.left,
-      value.top * this.area.height + this.area.top,
-      value.right * this.area.width + this.area.left,
-      value.bottom * this.area.height + this.area.top
+      this.area.left + this.area.width * value.left,
+      this.area.top + this.area.height * value.top,
+      this.area.left + this.area.width * value.right,
+      this.area.top + this.area.height * value.bottom
     );
+  }
 
-    console.log('AREA CHANGE AFTER', this.area);
+  public zoomIn() {
+    this.area = this.area.zoom(1.5);
+  }
 
+  public zoomOut() {
+    this.area = this.area.zoom(1 / 1.5);
+  }
+
+  public resetZoom() {
+    this.area = this.fractal.initialArea;
   }
 }

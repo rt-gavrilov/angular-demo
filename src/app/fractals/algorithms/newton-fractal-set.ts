@@ -7,12 +7,12 @@ export class NewtonFractalSet extends FractalSet {
 
   public readonly initialArea = new Rectangle(-1, -1, 1, 1);
 
-  getPoint(x: number, y: number): number {
+  getPoint(x: number, y: number, iterations: number = 256): number {
 
     let ReComplex0 = x;
     let ImComplex0 = y;
 
-    for (let i = 0; i < 256; i++) {
+    for (let i = 0; i < iterations; i++) {
 
         let Re2 = ReComplex0 * ReComplex0;
         let Im2 = ImComplex0 * ImComplex0;

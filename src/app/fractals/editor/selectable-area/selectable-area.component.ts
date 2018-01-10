@@ -18,14 +18,18 @@ export class SelectableAreaComponent {
     return this.container.nativeElement.getBoundingClientRect();
   }
 
-  public onMouseDown(event) {
+  public onMouseDown(event: MouseEvent) {
     this.selectedArea = new Rectangle(
-      event.pageX - this.canvasBounds.left,
-      event.pageY - this.canvasBounds.top
+      event.clientX - this.canvasBounds.left,
+      event.clientY - this.canvasBounds.top
     );
   }
 
-  public onMouseUp(event) {
+  public onMouseUp(event: MouseEvent) {
+    if (this.selectedArea.width < 20) {
+      this.selectedArea = null;
+      return;
+    }
 
     const width = this.canvasBounds.right - this.canvasBounds.left;
     const height = this.canvasBounds.bottom - this.canvasBounds.top;
@@ -42,17 +46,15 @@ export class SelectableAreaComponent {
     this.selectedArea = null;
   }
 
-  public onMouseMove(event) {
+  public onMouseMove(event: MouseEvent) {
 
     if ( ! this.selectedArea) {
       return;
     }
 
-    this.selectedArea.right = event.pageX - this.canvasBounds.left;
-    this.selectedArea.bottom = event.pageY - this.canvasBounds.top;
-  }
+    const widthToHeightRate = this.canvasBounds.width / this.canvasBounds.height;
 
-  onMouseWheel(event) {
-
+    this.selectedArea.right = event.clientX - this.canvasBounds.left;
+    this.selectedArea.bottom = this.selectedArea.top + this.selectedArea.width / widthToHeightRate;
   }
 }

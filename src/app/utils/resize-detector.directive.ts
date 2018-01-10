@@ -3,7 +3,7 @@ import {sleep} from './async-utils';
 import {Rectangle} from './rectangle';
 
 @Directive({
-  selector: '[resizeDetector]'
+  selector: '[rtResizeDetector]'
 })
 export class ResizeDetectorDirective implements OnInit {
 

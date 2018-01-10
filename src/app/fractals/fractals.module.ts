@@ -9,6 +9,9 @@ import {EditorComponent} from './editor/editor.component';
 import {SelectableAreaComponent} from './editor/selectable-area/selectable-area.component';
 import {MatCardModule} from '@angular/material/card';
 import {UtilsModule} from '../utils/utils.module';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 const routes: Routes = [
   {path: '', component: ShowroomComponent},
@@ -22,6 +25,9 @@ const routes: Routes = [
     FlexLayoutModule,
     RouterModule.forChild(routes),
     MatCardModule,
+    MatTooltipModule,
+    MatIconModule,
+    MatButtonModule,
     UtilsModule
   ],
   declarations: [
