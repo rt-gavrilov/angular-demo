@@ -19,9 +19,11 @@
     "import-blacklist": [
       true,
       "rxjs",
+      "rxjs/Rx",
       "rxjs/operators",
       "@angular/cdk",
-      "@angular/material"
+      "@angular/material",
+      "@covalent/core"
     ],
     "import-spacing": true,
     "indent": [
@@ -109,7 +111,6 @@
         "variable-declaration": "nospace"
       }
     ],
-    "typeof-compare": true,
     "unified-signatures": true,
     "variable-name": false,
     "whitespace": [

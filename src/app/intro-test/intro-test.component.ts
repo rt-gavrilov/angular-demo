@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {TdBounceAnimation, TdFadeInOutAnimation, TdHeadshakeAnimation, TdJelloAnimation} from '@covalent/core';
+import {TdBounceAnimation, TdFadeInOutAnimation, TdHeadshakeAnimation, TdJelloAnimation} from '@covalent/core/common';
 import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/operator/throttleTime';
 import {GrayOutAnimation} from '../utils/gray-out.animation';
