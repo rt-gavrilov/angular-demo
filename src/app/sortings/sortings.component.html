@@ -4,24 +4,9 @@
 
     <h3>Sorting algorithms<br>real-time comparison</h3>
 
-    <br>
+    <rt-sorting-options (change)="onOptionsChange($event)" [disabled]="running"></rt-sorting-options>
 
-    <mat-form-field>
-      <mat-select [(ngModel)]="sortingSetSelected" placeholder="Set">
-        <mat-option [value]="set" *ngFor="let set of sortingSets">{{set.name}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-select [(ngModel)]="arrayTypeSelected" placeholder="Array type">
-        <mat-option [value]="type" *ngFor="let type of arrayTypes">{{type.name}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <br>
-    <br>
-
-    <button mat-raised-button color="primary" (click)="run()">
+    <button mat-raised-button color="primary" [disabled]="options.algorithms.length == 0 || running" (click)="run()">
       Run!
     </button>
 
@@ -40,8 +25,8 @@
         [legend]="true"
         [showXAxisLabel]="true"
         [showYAxisLabel]="true"
-        xAxisLabel="Size"
-        yAxisLabel="Time"
+        xAxisLabel="Array size"
+        yAxisLabel="Sorting time, ms"
         [autoScale]="true"
         [yAxisTickFormatting]="axisDigits"
         [xAxisTickFormatting]="axisDigits">

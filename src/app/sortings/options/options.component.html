@@ -1,0 +1,74 @@
+<mat-form-field floatPlaceholder="always" class="no-underline">
+  <input matInput placeholder="Comparision mode" style="display: none" >
+  <mat-radio-group [(ngModel)]="comparisonMode" (ngModelChange)="emit()" [disabled]="disabled">
+    <mat-radio-button value="sameArray" color="primary" style="margin-bottom: 8px;">
+      Same array,<br>different algorithms
+    </mat-radio-button>
+    <mat-radio-button value="sameAlgorithm" color="primary">
+      Same algorithm,<br>different arrays
+    </mat-radio-button>
+  </mat-radio-group>
+</mat-form-field>
+
+<ng-container *ngIf="comparisonMode === 'sameArray'">
+
+  <div fxLayout>
+
+    <mat-form-field fxFlex="0 0 120px" floatPlaceholder="always" class="no-underline">
+      <input matInput placeholder="Algorithms" style="display: none">
+
+      <mat-checkbox
+        *ngFor="let algorithm of algorithms"
+        color="primary" style="display: block;"
+        [checked]="algorithmsChosen.has(algorithm)"
+        (change)="onAlgorithmChosen(algorithm, $event.checked)"
+        [disabled]="disabled"
+      >
+        {{algorithm.name}}
+      </mat-checkbox>
+
+    </mat-form-field>
+
+    <div fxFlex="none" fxLayout="column" fxLayoutGap="8px" style="margin-top: 24px; text-align: center;">
+      <button mat-raised-button [disabled]="disabled" [color]="allPrimitivesChosen ? 'primary' : ''" (click)="togglePrimitives()">Primitives</button>
+      <button mat-raised-button [disabled]="disabled" [color]="allSmartsChosen ? 'primary' : ''" (click)="toggleSmarts()">Smarts</button>
+    </div>
+
+  </div>
+
+  <mat-form-field>
+    <mat-select placeholder="Array type" [(ngModel)]="arrayTypeSelected" (ngModelChange)="emit()" [disabled]="disabled">
+      <mat-option
+        *ngFor="let type of arrayTypes"
+        [value]="type">
+        {{type.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</ng-container>
+
+<ng-container *ngIf="comparisonMode === 'sameAlgorithm'">
+
+  <mat-form-field floatPlaceholder="always" class="no-underline">
+    <input matInput placeholder="Algorithm" style="display: none">
+    <mat-radio-group [(ngModel)]="algorithmChosen" (ngModelChange)="emit()" [disabled]="disabled"
+                     style="display: block; padding-top: 2px;">
+      <mat-radio-button
+        *ngFor="let algorithm of algorithms"
+        [value]="algorithm"
+        color="primary" style="margin-bottom: 4px; display: block;"
+      >
+        {{algorithm.name}}
+      </mat-radio-button>
+    </mat-radio-group>
+  </mat-form-field>
+
+</ng-container>
+
+<mat-form-field>
+  <mat-select placeholder="Max array size" [(ngModel)]="arraySize" (ngModelChange)="emit()" [disabled]="disabled">
+    <mat-option *ngFor="let i of arraySizes" [value]="i">
+      {{i / 1000}}k
+    </mat-option>
+  </mat-select>
+</mat-form-field>

@@ -15,9 +15,9 @@ export class ArrayBuilder {
     return this;
   }
 
-  public ramp(): ArrayBuilder {
+  public ramp(from: number = 0, step: number = 1): ArrayBuilder {
     for (let i = 0; i < this.internal.length; i++) {
-      this.internal[i] = i;
+      this.internal[i] = (from + i) * step;
     }
     return this;
   }

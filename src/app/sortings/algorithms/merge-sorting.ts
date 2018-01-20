@@ -19,7 +19,7 @@ export class MergeSorting extends Sorting {
 
   private sortRange(from: number, to: number) {
 
-    if (to === from) {
+    if (to <= from) {
       return;
     }
 

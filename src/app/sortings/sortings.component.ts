@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
 import {TdDigitsPipe} from '@covalent/core';
-import {ALL, PRIMITIVES, SMARTS} from './algorithms/sortings';
 import {sleep} from '../utils/async-utils';
 import {ArrayBuilder} from '../utils/array-builder';
+import {SortingOptions} from './options/options';
+import {Sorting} from './algorithms/sorting';
 
 @Component({
   selector: 'rt-sortings',
@@ -11,25 +12,14 @@ import {ArrayBuilder} from '../utils/array-builder';
 })
 export class SortingsComponent {
 
-  public readonly arrayTypes = [
-    {id: 'random', name: 'Random'},
-    {id: 'asc', name: 'Ascending'},
-    {id: 'desc', name: 'Descending'},
-    {id: 'flat', name: 'Flat'},
-    {id: 'asc90%', name: 'Ascending mostly'},
-    {id: 'desc90%', name: 'Descending mostly'}
-  ];
-  public arrayTypeSelected = this.arrayTypes[0];
+  public options: SortingOptions;
 
-  public readonly sortingSets = [
-    {name: 'All', value: ALL},
-    {name: 'Primitives', value: PRIMITIVES},
-    {name: 'Smarts', value: SMARTS}
-  ];
-  public sortingSetSelected = this.sortingSets[2];
+  public running = false;
 
   public readonly colorScheme = {
-    domain: ['red', 'blue', 'cyan', 'magenta', 'yellow']
+    domain: [
+      'red', 'orange', 'yellowgreen', 'goldenrod', 'green', 'blue', 'darkblue', 'cyan', 'magenta', 'purple'
+    ]
   };
 
   public chartData;
@@ -39,30 +29,59 @@ export class SortingsComponent {
   }
 
   public get sizes(): number[] {
-    const coeff = this.sortingSetSelected.value === SMARTS ? 1e5 : 1e3;
-    return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map( value => value * coeff);
+    const size = this.options.arraySize;
+
+    return new ArrayBuilder(11).ramp(0, size / 10).raw;
+  }
+
+  public onOptionsChange(value: SortingOptions) {
+    this.options = value;
   }
 
   public async run() {
 
-    const temp = this.sortingSetSelected.value.map( value => ({
-      name: value.name, series: []
+    this.running = true;
+
+    if (this.options.comparisonMode === 'sameArray') {
+      await this.compareAlgorithms();
+    } else {
+      await this.compareArrays();
+    }
+
+    this.running = false;
+  }
+
+  private async compareAlgorithms() {
+    const interrupted = new Set<Sorting>();
+
+    const temp = this.options.algorithms.map( value => ({
+      name: value.name,
+      series: []
     }));
 
     for (const size of this.sizes) {
 
-      for (const sorting of this.sortingSetSelected.value) {
+      for (const sorting of this.options.algorithms) {
 
-        const now = new Date().getTime();
+        if (interrupted.has(sorting)) {
+          continue;
+        }
 
-        sorting.run( this.createArray(size) );
+        const time = this.sortAndMeasure(
+          sorting,
+          this.createArray(this.options.arrayTypes[0].id, size)
+        );
 
         temp
           .find( value => value.name === sorting.name )
           .series.push({
             name: size,
-            value: new Date().getTime() - now
+            value: time
           });
+
+        if (time > 100) {
+          interrupted.add(sorting);
+        }
       }
 
       await sleep(500);
@@ -71,17 +90,64 @@ export class SortingsComponent {
     }
   }
 
-  private createArray(size: number): number[] {
+  private async compareArrays() {
+
+    const interrupted = new Set<string>();
+
+    const temp = this.options.arrayTypes.map(value => ({
+      id: value.id,
+      name: value.name,
+      series: []
+    }));
+
+    for (const size of this.sizes) {
+
+      for (const arrayType of this.options.arrayTypes) {
+
+        if (interrupted.has(arrayType.id)) {
+          continue;
+        }
+
+        const time = this.sortAndMeasure(
+          this.options.algorithms[0],
+          this.createArray(arrayType.id, size)
+        );
+
+        temp
+          .find( value => value.name === arrayType.name )
+          .series.push({
+            name: size,
+            value: time
+          });
+
+        if (time > 100) {
+          interrupted.add(arrayType.id);
+        }
+      }
+
+      await sleep(500);
+
+      this.chartData = temp.slice();
+    }
+  }
+
+  private sortAndMeasure(sorting: Sorting, array: number[]): number {
+    const now = new Date().getTime();
+    sorting.run( array );
+    return new Date().getTime() - now;
+  }
+
+  private createArray(type: string, size: number): number[] {
 
     const builder = new ArrayBuilder(size);
 
-    switch (this.arrayTypeSelected.id) {
+    switch (type) {
       case 'asc': builder.ramp(); break;
       case 'desc': builder.ramp().reverse(); break;
       case 'random': builder.randomize(1, 100); break;
       case 'flat': builder.flat(10); break;
-      case 'asc90%': builder.ramp().shuffle(0.9); break;
-      case 'desc90%': builder.ramp().reverse().shuffle(0.9); break;
+      case 'asc90%': builder.ramp().shuffle(0.05); break;
+      case 'desc90%': builder.ramp().reverse().shuffle(0.05); break;
     }
 
     return builder.raw;
