@@ -2,7 +2,9 @@
 
   <mat-card fxFlexAlign="start" fxFlex="250px" fxLayout="column" fxLayoutAlign="start stretch">
 
-    <h3>Sorting algorithms<br>real-time comparison</h3>
+    <h2>Sorting algorithms<br>real-time comparison</h2>
+
+    <mat-divider fxFlex></mat-divider>
 
     <rt-sorting-options (change)="onOptionsChange($event)" [disabled]="running"></rt-sorting-options>
 

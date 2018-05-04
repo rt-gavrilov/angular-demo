@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
 import {TdBounceAnimation, TdFadeInOutAnimation, TdHeadshakeAnimation, TdJelloAnimation} from '@covalent/core/common';
-import {Subject} from 'rxjs/Subject';
-import 'rxjs/add/operator/throttleTime';
+import {Subject} from 'rxjs';
 import {GrayOutAnimation} from '../utils/gray-out.animation';
 import * as lodash from 'lodash';
 import {IntroTestGuard} from './intro-test.guard';
 import {Router} from '@angular/router';
+import {throttleTime} from 'rxjs/operators';
 
 @Component({
   selector: 'rt-intro-test',
@@ -72,7 +72,7 @@ class Framework {
     public comment: string,
     public valid = false
   ) {
-    this.debouncer.throttleTime(500).subscribe( () => {
+    this.debouncer.pipe(throttleTime(500)).subscribe( () => {
 
       const random = Math.random();
 

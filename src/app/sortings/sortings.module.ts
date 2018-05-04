@@ -12,6 +12,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
 import {SortingOptionsComponent} from './options/options.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDividerModule} from '@angular/material/divider';
 
 const routes: Routes = [
   {path: '', component: SortingsComponent},
@@ -25,6 +26,7 @@ const routes: Routes = [
     MatButtonModule,
     MatInputModule,
     MatSelectModule,
+    MatDividerModule,
     MatCardModule,
     MatCheckboxModule,
     MatRadioModule,

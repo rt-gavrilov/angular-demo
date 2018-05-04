@@ -9,6 +9,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {RouterModule, Routes} from '@angular/router';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {RootComponent} from './root.component';
+import {OverlayModule} from '@angular/cdk/overlay';
 
 const routes: Routes = [
   {path: '', canActivate: [IntroTestGuard], component: AppComponent, children: [
@@ -33,6 +34,7 @@ const routes: Routes = [
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
+    OverlayModule,
     RouterModule,
     FlexLayoutModule
   ],

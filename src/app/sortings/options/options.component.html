@@ -1,4 +1,4 @@
-<mat-form-field floatPlaceholder="always" class="no-underline">
+<mat-form-field floatLabel="always" class="no-underline">
   <input matInput placeholder="Comparision mode" style="display: none" >
   <mat-radio-group [(ngModel)]="comparisonMode" (ngModelChange)="emit()" [disabled]="disabled">
     <mat-radio-button value="sameArray" color="primary" style="margin-bottom: 8px;">
@@ -14,7 +14,7 @@
 
   <div fxLayout>
 
-    <mat-form-field fxFlex="0 0 120px" floatPlaceholder="always" class="no-underline">
+    <mat-form-field fxFlex="0 0 120px" floatLabel="always" class="no-underline">
       <input matInput placeholder="Algorithms" style="display: none">
 
       <mat-checkbox
@@ -49,7 +49,7 @@
 
 <ng-container *ngIf="comparisonMode === 'sameAlgorithm'">
 
-  <mat-form-field floatPlaceholder="always" class="no-underline">
+  <mat-form-field floatLabel="always" class="no-underline">
     <input matInput placeholder="Algorithm" style="display: none">
     <mat-radio-group [(ngModel)]="algorithmChosen" (ngModelChange)="emit()" [disabled]="disabled"
                      style="display: block; padding-top: 2px;">

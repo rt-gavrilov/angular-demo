@@ -2,11 +2,11 @@
   background: rgba(0,0,0,0.25);
 }
 
-a[mat-button] p > * {
-  vertical-align: middle;
-}
-
 mat-toolbar {
   z-index: 100;
   position: relative;
+}
+
+[mat-button] {
+  min-width: unset;
 }

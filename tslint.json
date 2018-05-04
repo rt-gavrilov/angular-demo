@@ -18,9 +18,7 @@
     "forin": true,
     "import-blacklist": [
       true,
-      "rxjs",
       "rxjs/Rx",
-      "rxjs/operators",
       "@angular/cdk",
       "@angular/material",
       "@covalent/core"
@@ -120,18 +118,6 @@
       "check-operator",
       "check-separator",
       "check-type"
-    ],
-    "directive-selector": [
-      true,
-      "attribute",
-      "rt",
-      "camelCase"
-    ],
-    "component-selector": [
-      true,
-      "element",
-      "rt",
-      "kebab-case"
     ],
     "no-output-on-prefix": true,
     "use-input-property-decorator": true,

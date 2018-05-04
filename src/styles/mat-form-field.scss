@@ -1,0 +1,7 @@
+html .mat-form-field {
+  width: 100%;
+
+  &.no-underline .mat-form-field-underline {
+    background-color: transparent;
+  }
+}

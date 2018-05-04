@@ -8,7 +8,7 @@ import {Sorting} from './algorithms/sorting';
 @Component({
   selector: 'rt-sortings',
   templateUrl: './sortings.component.html',
-  styleUrls: ['./sortings.component.css']
+  styleUrls: ['./sortings.component.scss']
 })
 export class SortingsComponent {
 

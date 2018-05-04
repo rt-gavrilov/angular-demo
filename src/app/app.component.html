@@ -1,39 +1,30 @@
 <div fxLayout="column" style="height: 100%;">
 
   <mat-toolbar fxFlex="none" color="primary" class="mat-elevation-z5">
-
-    <div fxLayout="row" fxLayoutAlign="stretch center" fxFill>
-
-      <a fxFlex="none" routerLink="/about" mat-button routerLinkActive="active">
-        <p>
-          <mat-icon class="mat-36">home</mat-icon>
-        </p>
+    <mat-toolbar-row fxLayout="row" fxLayoutAlign="stretch center">
+      <a routerLink="/about" mat-button routerLinkActive="active" fxFlexAlign="stretch" fxLayoutAlign="center center">
+        <mat-icon class="mat-icon-40">home</mat-icon>
       </a>
 
       <div fxFlex="stretch"></div>
 
-      <a fxFlex="none" mat-button routerLink="/sortings" routerLinkActive="active">
-        <p>
-          <mat-icon class="md-24" style="transform: scale(-1,-1);">sort</mat-icon>
-          <span>Sortings</span>
-        </p>
+      <a mat-button routerLink="/sortings" routerLinkActive="active" fxFlexAlign="stretch" fxLayoutAlign="center center">
+        <mat-icon style="transform: scale(-1,-1);">sort</mat-icon>&nbsp;
+        <span>Sortings</span>
       </a>
 
-      <a fxFlex="none" mat-button routerLink="/fractals" routerLinkActive="active">
-        <p>
-          <mat-icon>fingerprint</mat-icon>
-          Fractals
-        </p>
+      <a mat-button routerLink="/fractals" routerLinkActive="active" fxFlexAlign="stretch" fxLayoutAlign="center center">
+        <mat-icon>fingerprint</mat-icon>&nbsp;
+        Fractals
       </a>
 
       <div fxFlex="stretch"></div>
 
-      <a fxFlex="none" mat-button href="https://github.com/rt-gavrilov/angular-demo" target="_blank">
-        <p>
-          <img src="assets/github.logo.png" style="width: 32px; height: 32px; filter: invert(100%);">
-        </p>
+      <a mat-button href="https://github.com/rt-gavrilov/angular-demo" target="_blank"
+         fxFlexAlign="stretch" fxLayoutAlign="center center">
+        <img src="assets/github.logo.png" style="width: 32px; height: 32px; filter: invert(100%);">
       </a>
-    </div>
+    </mat-toolbar-row>
   </mat-toolbar>
 
   <div fxFlex="1 1 100%">

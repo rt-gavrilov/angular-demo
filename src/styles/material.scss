@@ -12,8 +12,7 @@ $theme: mat-light-theme($primary, $accent, $warn);
 @include angular-material-theme($theme);
 @include covalent-theme($theme);
 
-@import '../../node_modules/@covalent/core/common/material-icons.css';
-
-@import 'mat-card.custom';
-@import 'mat-form-field.custom';
-@import 'td-message.custom';
+@import 'mat-card';
+@import 'mat-form-field';
+@import 'mat-icon';
+@import 'td-message';
