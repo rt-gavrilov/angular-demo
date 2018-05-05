@@ -10,6 +10,8 @@ import {RouterModule, Routes} from '@angular/router';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {RootComponent} from './root.component';
 import {OverlayModule} from '@angular/cdk/overlay';
+import {ServiceWorkerModule} from '@angular/service-worker';
+import {environment} from '../environments/environment';
 
 const routes: Routes = [
   {path: '', canActivate: [IntroTestGuard], component: AppComponent, children: [
@@ -36,7 +38,8 @@ const routes: Routes = [
     MatIconModule,
     OverlayModule,
     RouterModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [IntroTestGuard],
   bootstrap: [RootComponent]
