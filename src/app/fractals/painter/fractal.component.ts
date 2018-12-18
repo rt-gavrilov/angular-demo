@@ -2,6 +2,7 @@ import {Component, Input, OnChanges, ViewChild} from '@angular/core';
 import {FractalPainter} from '../algorithms/fractal-painter';
 import {FractalSet} from '../algorithms/fractal-set';
 import {Rectangle} from '../../utils/rectangle';
+import {FractalPainterWorker} from '../algorithms/fractal-painter-worker';
 
 @Component({
   selector: 'rt-fractal',
@@ -12,26 +13,22 @@ export class FractalComponent implements OnChanges {
 
   @ViewChild('canvas') canvas;
 
-  @Input() painter: FractalSet;
+  @Input() fractalSet: FractalSet;
   @Input() area: Rectangle;
   @Input() keepWhRate = false;
 
   private bounds: Rectangle;
 
-  constructor() {
-      const worker = new Worker('fractal-worker.js');
-      console.log('WORKER', worker);
-  }
+  private async redraw() {
 
-  private redraw() {
-
-    if ( ! this.painter || ! this.bounds) {
+    if ( ! this.fractalSet || ! this.bounds) {
       return;
     }
 
     const area = this.transformArea();
 
-    const imageData = new FractalPainter(this.painter).paint(area, this.bounds.width, this.bounds.height);
+    // const imageData = FractalPainter.paint(this.fractalSet, area, this.bounds.width, this.bounds.height);
+    const imageData = await FractalPainterWorker.paint(this.fractalSet, area, this.bounds.width, this.bounds.height);
 
     this.canvas.nativeElement.width = this.bounds.width;
     this.canvas.nativeElement.height = this.bounds.height;
@@ -76,7 +73,7 @@ export class FractalComponent implements OnChanges {
   }
 
   public ngOnChanges() {
-    this.area = this.area || this.painter.initialArea;
+    this.area = this.area || this.fractalSet.initialArea;
     this.redraw();
   }
 }

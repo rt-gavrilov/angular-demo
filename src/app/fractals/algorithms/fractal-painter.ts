@@ -3,11 +3,11 @@ import {FractalSet} from './fractal-set';
 
 export class FractalPainter {
 
-  constructor(
-    private strategy: FractalSet
-  ) {}
+  private constructor() {}
 
-  public paint(area: Rectangle, width: number, height: number): ImageData {
+  public static paint(fractal: FractalSet, area: Rectangle, width: number, height: number): ImageData {
+
+    const now = new Date().getTime();
 
     const result = new ImageData(width, height);
 
@@ -21,7 +21,7 @@ export class FractalPainter {
     for (let j = 0, y = area.top; j < height; j++, y += dy) {
       for (let i = 0, x = area.left; i < width; i++, x += dx) {
 
-        const pointValue: number = this.strategy.getPoint(x, y, iterations);
+        const pointValue: number = fractal.getPoint(x, y, iterations);
 
         result.data[position++] = 8 * pointValue;
         result.data[position++] = 4 * pointValue;
@@ -29,6 +29,8 @@ export class FractalPainter {
         result.data[position++] = 255;
       }
     }
+
+    console.log('TOTAL', new Date().getTime() - now);
 
     return result;
   }

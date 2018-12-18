@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng run app:build-fractal-worker && ng serve",
-    "build": "ng build --prod",
+    "build": "ng run app:build-fractal-worker && ng build --prod",
     "report": "ng build --prod --stats-json && webpack-bundle-analyzer ./dist/stats.json",
     "test": "ng test",
     "lint": "ng lint",
