@@ -18,6 +18,11 @@ export class FractalComponent implements OnChanges {
 
   private bounds: Rectangle;
 
+  constructor() {
+      const worker = new Worker('fractal-worker.js');
+      console.log('WORKER', worker);
+  }
+
   private redraw() {
 
     if ( ! this.painter || ! this.bounds) {
