@@ -7,13 +7,14 @@ const worker: Worker = self as any;
 
 worker.onmessage = function({data}) {
 
-  const {type, params} = data;
-
-  console.log('message TO worker', type, params);
+  const {id, type, params} = data;
 
   switch (type) {
     case 'paint':
-      paint(
+
+      const now = new Date().getTime();
+
+      const image = paint(
         find(params.fractal),
         new Rectangle(
           params.area.left,
@@ -24,6 +25,11 @@ worker.onmessage = function({data}) {
         params.imageWidth,
         params.imageHeight
       );
+
+      console.log('CALCULATING TOTAL', new Date().getTime() - now);
+
+      worker.postMessage({id, type: 'painted', imageData: image});
+
       break;
     default:
       throw new Error('Unsupported command');
@@ -31,13 +37,7 @@ worker.onmessage = function({data}) {
 };
 
 
-function paint(fractal: FractalSet, area: Rectangle, width: number, height: number) {
-
-  console.log('PAINT', fractal.name, area.width, area.height, width, height);
-
-  console.log('IN WORKER 1', new Date().getTime());
-
-  const now = new Date().getTime();
+function paint(fractal: FractalSet, area: Rectangle, width: number, height: number): ImageData {
 
   const result = new ImageData(width, height);
 
@@ -53,9 +53,6 @@ function paint(fractal: FractalSet, area: Rectangle, width: number, height: numb
 
       const pointValue: number = fractal.getPoint(x, y, iterations);
 
-      // result.data[position++] = 255;
-      // result.data[position++] = 0;
-      // result.data[position++] = 0;
       result.data[position++] = 8 * pointValue;
       result.data[position++] = 4 * pointValue;
       result.data[position++] = 2 * pointValue;
@@ -63,9 +60,5 @@ function paint(fractal: FractalSet, area: Rectangle, width: number, height: numb
     }
   }
 
-  console.log('IN WORKER 1', new Date().getTime() - now);
-
-  worker.postMessage({type: 'painted', imageData: result});
-
-  console.log('IN WORKER 2', new Date().getTime() - now);
+  return result;
 }

@@ -1,23 +1,16 @@
 import {Rectangle} from '../../utils/rectangle';
 import {FractalSet} from './fractal-set';
-import {sleep} from '../../utils/async-utils';
 
 export class FractalPainterWorker {
 
-  // private static worker = new Worker('fractal-worker.js');
+  private static worker = new Worker('fractal-worker.js');
 
   public static async paint(fractal: FractalSet, area: Rectangle, width: number, height: number): Promise<ImageData> {
 
-    const now = new Date().getTime();
+    const messageId = Math.random();
 
-    const worker = new Worker('fractal-worker.js');
-
-    console.log('PAINT IN WORKER 0', new Date().getTime() - now, new Date().getTime());
-
-    // const id = Math.random();
-
-    worker.postMessage({
-      // id,
+    FractalPainterWorker.worker.postMessage({
+      id: messageId,
       type: 'paint',
       params: {
         fractal: fractal.name,
@@ -27,18 +20,24 @@ export class FractalPainterWorker {
       }
     });
 
-    return new Promise<ImageData>(success => {
-      worker.onmessage = async (message: any) => {
-        console.log('message FROM worker', message.type);
-        success(message.data.imageData);
-
-        await sleep();
-
-        // worker.terminate();
-
-        console.log('TOTAL', new Date().getTime() - now);
-      };
+    let outsideResolve;
+    const result = new Promise<ImageData>(success => {
+      outsideResolve = success;
     });
+
+    const listener = message => {
+
+      const {id, imageData} = message.data;
+
+      if (id == messageId) {
+        FractalPainterWorker.worker.removeEventListener('message', listener);
+        outsideResolve(imageData);
+      }
+    };
+
+    FractalPainterWorker.worker.addEventListener('message', listener);
+
+    return result;
   }
 
   private calcColor(iterations: number): number {

@@ -27,8 +27,12 @@ export class FractalComponent implements OnChanges {
 
     const area = this.transformArea();
 
+    const now = new Date().getTime();
+
     // const imageData = FractalPainter.paint(this.fractalSet, area, this.bounds.width, this.bounds.height);
     const imageData = await FractalPainterWorker.paint(this.fractalSet, area, this.bounds.width, this.bounds.height);
+
+    console.log('PAINTING TIME', new Date().getTime() - now);
 
     this.canvas.nativeElement.width = this.bounds.width;
     this.canvas.nativeElement.height = this.bounds.height;

@@ -1,13 +1,9 @@
 import {Rectangle} from '../../utils/rectangle';
 import {FractalSet} from './fractal-set';
 
-export class FractalPainter {
-
-  private constructor() {}
+export abstract class FractalPainter {
 
   public static paint(fractal: FractalSet, area: Rectangle, width: number, height: number): ImageData {
-
-    const now = new Date().getTime();
 
     const result = new ImageData(width, height);
 
@@ -29,8 +25,6 @@ export class FractalPainter {
         result.data[position++] = 255;
       }
     }
-
-    console.log('TOTAL', new Date().getTime() - now);
 
     return result;
   }
