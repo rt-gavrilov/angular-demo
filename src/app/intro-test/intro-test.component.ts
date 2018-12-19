@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
-import {TdBounceAnimation, TdFadeInOutAnimation, TdHeadshakeAnimation, TdJelloAnimation} from '@covalent/core/common';
+import {tdBounceAnimation, tdFadeInOutAnimation, tdHeadshakeAnimation, tdJelloAnimation} from '@covalent/core/common';
 import {Subject} from 'rxjs';
 import {GrayOutAnimation} from '../utils/gray-out.animation';
-import * as lodash from 'lodash';
+import {pull, shuffle} from 'lodash';
 import {IntroTestGuard} from './intro-test.guard';
 import {Router} from '@angular/router';
 import {throttleTime} from 'rxjs/operators';
@@ -12,19 +12,17 @@ import {throttleTime} from 'rxjs/operators';
   templateUrl: './intro-test.component.html',
   styleUrls: ['./intro-test.component.css'],
   animations: [
-    TdFadeInOutAnimation(),
-    TdBounceAnimation(),
-    TdHeadshakeAnimation(),
-    TdJelloAnimation(),
+    tdFadeInOutAnimation,
+    tdBounceAnimation,
+    tdHeadshakeAnimation,
+    tdJelloAnimation,
     GrayOutAnimation()
   ]
 })
 export class IntroTestComponent {
 
-  public readonly frameworks = lodash.shuffle(Framework.THEM_ALL);
+  public readonly frameworks = shuffle(Framework.THEM_ALL);
   public chosen: Framework;
-
-  public completed = false;
 
   constructor(
     private router: Router
@@ -36,34 +34,45 @@ export class IntroTestComponent {
 
   public onSelect(value: Framework) {
     this.chosen = value;
-    const valid = this.chosen.select();
-    if (valid) {
-      localStorage.setItem(IntroTestGuard.localStorageKey, 'true');
-      this.completed = true;
-      setTimeout(() => this.router.navigate(['/']), 1000);
+    this.chosen.select();
+
+    if ( ! this.chosen.valid) {
+      return;
     }
+
+    for (let framework of this.frameworks) {
+      if (! framework.valid) {
+        framework.disabled = true;
+        framework.shown = false;
+      }
+    }
+
+    localStorage.setItem(IntroTestGuard.localStorageKey, 'true');
+
+    setTimeout(() => this.router.navigate(['/']), 1000);
   }
 }
 
 class Framework {
 
   public static readonly THEM_ALL = [
-    new Framework('react', 'Not bad actually, but not in this demo.'),
+    new Framework('react', 'Mmmm... maybe next time.'),
     new Framework('angular', 'Ok, fine!', true),
     new Framework('vue', 'You cannot be serious!'),
     new Framework('ember', 'What is this?'),
     new Framework('meteor', 'No way!'),
     new Framework('polymer', 'Oh, come on!'),
     new Framework('jquery', 'Wait, what???'),
-    new Framework('backbone', 'It\'s nearly 2018! Forget about it!')
+    new Framework('backbone', 'It\'s nearly 2019! Forget about it!')
   ];
 
   public shown = false;
   public disabled = false;
-
   public jello = false;
   public headshake = false;
   public bounce = false;
+
+  private prevAnimation: string = null;
 
   private debouncer = new Subject();
 
@@ -74,11 +83,27 @@ class Framework {
   ) {
     this.debouncer.pipe(throttleTime(500)).subscribe( () => {
 
-      const random = Math.random();
+      if (this.disabled) {
+        return;
+      }
 
-      this.jello = random <= 1 / 3;
-      this.headshake = random > 1 / 3 && random <= 2 / 3;
-      this.bounce = random > 2 / 3;
+      const availableAnimations = pull([
+        'jello',
+        'headshake',
+        'bounce'
+      ], this.prevAnimation);
+
+      const animation = shuffle(availableAnimations)[0];
+
+      if (animation == 'jello') {
+        this.jello = ! this.jello;
+      } else if (animation == 'headshake') {
+        this.headshake = ! this.headshake;
+      } else {
+        this.bounce = ! this.bounce;
+      }
+
+      this.prevAnimation = animation;
     });
   }
 
@@ -86,17 +111,8 @@ class Framework {
     return `assets/${this.id}.logo.png`;
   }
 
-  public animate() {
-
-    if (this.disabled) {
-      return;
-    }
-
-    this.jello = false;
-    this.headshake = false;
-    this.bounce = false;
-
-    setTimeout( () => this.debouncer.next(), 0);
+  public async animate() {
+    this.debouncer.next();
   }
 
   public select(): boolean {
