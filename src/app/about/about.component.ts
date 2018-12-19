@@ -10,4 +10,15 @@ import {AppearAnimation} from '../utils/appear.animation';
   ]
 })
 export class AboutComponent {
+  assets = [
+    "assets/angular.logo.png",
+    "assets/material-design.logo.svg",
+    "assets/covalent.logo.svg",
+    "assets/swimlane.logo.png",
+    "assets/rxjs.logo.png",
+    "assets/typescript.logo.png",
+    "assets/sass.logo.png",
+    "assets/webpack.logo.svg",
+    "assets/npm.logo.png"
+  ];
 }
