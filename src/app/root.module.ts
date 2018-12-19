@@ -6,7 +6,7 @@ import {IntroTestGuard} from './intro-test/intro-test.guard';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import {RouterModule, Routes} from '@angular/router';
+import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {RootComponent} from './root.component';
 import {OverlayModule} from '@angular/cdk/overlay';
@@ -32,7 +32,7 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,

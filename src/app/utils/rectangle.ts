@@ -4,7 +4,16 @@ export class Rectangle {
     public top: number = 0,
     public right: number = 0,
     public bottom: number = 0
-  ) {}
+  ) {
+    // if (left > right) {
+    //   console.log('left>right 1', left, right);
+    //   [left, right] = [right, left];
+    //   console.log('left>right 2', left, right);
+    // }
+    // if (top > bottom) {
+    //   [this.top, this.bottom] = [this.bottom, this.top];
+    // }
+  }
 
   public get width() {
     return this.right - this.left;
@@ -12,6 +21,30 @@ export class Rectangle {
 
   public get height() {
     return this.bottom - this.top;
+  }
+
+  public get leftTopQuadrant(): Rectangle {
+    return new Rectangle(
+      this.left, this.top,this.left + this.width / 2, this.top + this.height / 2
+    );
+  }
+
+  public get rightTopQuadrant(): Rectangle {
+    return new Rectangle(
+      this.left + this.width / 2, this.top, this.right, this.top + this.height / 2
+    );
+  }
+
+  public get leftBottomQuadrant(): Rectangle {
+    return new Rectangle(
+      this.left, this.top + this.height / 2,this.left + this.width / 2, this.bottom
+    );
+  }
+
+  public get rightBottomQuadrant(): Rectangle {
+    return new Rectangle(
+      this.left + this.width / 2, this.top + this.height / 2,this.right, this.bottom
+    );
   }
 
   public move(dx: number, dy: number): Rectangle {

@@ -3,13 +3,19 @@ import {FractalSet} from './fractal-set';
 
 export class FractalPainterWorker {
 
-  private static worker = new Worker('fractal-worker.js');
+  private static lastWorker = 0;
+  private static workers = [1,2,3,4].map(value => new Worker('fractal-worker.js'));
 
   public static async paint(fractal: FractalSet, area: Rectangle, width: number, height: number): Promise<ImageData> {
 
     const messageId = Math.random();
 
-    FractalPainterWorker.worker.postMessage({
+    FractalPainterWorker.lastWorker ++;
+    const worker = FractalPainterWorker.workers[
+      FractalPainterWorker.lastWorker % FractalPainterWorker.workers.length
+    ];
+
+    worker.postMessage({
       id: messageId,
       type: 'paint',
       params: {
@@ -30,12 +36,12 @@ export class FractalPainterWorker {
       const {id, imageData} = message.data;
 
       if (id == messageId) {
-        FractalPainterWorker.worker.removeEventListener('message', listener);
+        worker.removeEventListener('message', listener);
         outsideResolve(imageData);
       }
     };
 
-    FractalPainterWorker.worker.addEventListener('message', listener);
+    worker.addEventListener('message', listener);
 
     return result;
   }

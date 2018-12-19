@@ -11,9 +11,6 @@ worker.onmessage = function({data}) {
 
   switch (type) {
     case 'paint':
-
-      const now = new Date().getTime();
-
       const image = paint(
         find(params.fractal),
         new Rectangle(
@@ -25,8 +22,6 @@ worker.onmessage = function({data}) {
         params.imageWidth,
         params.imageHeight
       );
-
-      console.log('CALCULATING TOTAL', new Date().getTime() - now);
 
       worker.postMessage({id, type: 'painted', imageData: image});
 
