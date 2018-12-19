@@ -1,44 +1,38 @@
-<mat-card style="max-width: 800px; margin: 16px auto;">
+<mat-card fxLayout="row wrap" fxLayoutAlign="center center" class="icon-container mat-elevation-z3">
+  <mat-card *ngFor="let asset of assets; let i = index"
+            fxLayoutAlign="center center"
+            class="small-icon-wrapper"
+            [@appear]="{value: true, params: {delay: 500 + i * 200}}"
+  >
+    <img [src]="asset">
+  </mat-card>
+</mat-card>
 
-  <div fxLayout="row wrap" fxLayoutAlign="center">
-    <mat-card fxLayoutAlign="center center" class="small-icon-wrapper" [@appear]="{value: true, params: {delay: 500}}">
-      <img src="assets/angular.logo.png">
-    </mat-card>
-    <mat-card fxLayoutAlign="center center" class="small-icon-wrapper" [@appear]="{value: true, params: {delay: 750}}">
-      <img src="assets/material-design.logo.svg">
-    </mat-card>
-    <mat-card fxLayoutAlign="center center" class="small-icon-wrapper" [@appear]="{value: true, params: {delay: 1000}}">
-      <img src="assets/covalent.logo.svg">
-    </mat-card>
-    <mat-card fxLayoutAlign="center center" class="small-icon-wrapper" [@appear]="{value: true, params: {delay: 1250}}">
-      <img src="assets/typescript.logo.png">
-    </mat-card>
-    <mat-card fxLayoutAlign="center center" class="small-icon-wrapper" [@appear]="{value: true, params: {delay: 1500}}">
-      <img src="assets/sass.logo.png">
-    </mat-card>
-    <mat-card fxLayoutAlign="center center" class="small-icon-wrapper" [@appear]="{value: true, params: {delay: 1750}}">
-      <img src="assets/npm.logo.png">
-    </mat-card>
+<div fxLayoutAlign="center">
+
+  <div style="margin: 64px 32px 32px 32px">
+    <p>
+      This demo is built on <a href="https://angular.io" target="_blank">Angular</a> platform
+      and written fully in <a href="http://www.typescriptlang.org" target="_blank">TypeScript</a>
+    </p>
+    <p>
+      As a component set it utilizes the power of brilliant <a href="https://material.angular.io/" target="_blank">Angular Material</a>
+      and its awesome extension - <a href="https://teradata.github.io/covalent" target="_blank">Covalent</a>
+    </p>
+    <p>
+      Then flexbox via <a href="https://github.com/angular/flex-layout" target="_blank">Angular Flex Layout</a>
+      and finally <a href="https://github.com/swimlane/ngx-charts" target="_blank">NGX Charts</a> - a free charting engine
+    </p>
+
+    <p>This demo may look trivial, but in fact it's based on quite complicated technics like<br>
+      webworkers & custom Webpack configuration, async\await & RxJS streams, directives & parametrized animations.
+    </p>
+
+    <p>It's very much in progress, but of course there's something to show for now:</p>
+    <ul>
+      <li><a routerLink="/sortings">Real-time sorting algorithm comparison</a></li>
+      <li><a routerLink="/fractals">Simple fractal painter</a></li>
+    </ul>
   </div>
 
-  <p>
-    This demo is built on <a href="https://angular.io" target="_blank">Angular</a> platform
-    and written fully in <a href="http://www.typescriptlang.org" target="_blank">TypeScript</a>
-  </p>
-  <p>
-    As a component set it utilizes the power of brilliant <a href="https://material.angular.io/" target="_blank">Angular Material</a>
-    and its awesome extension - <a href="https://teradata.github.io/covalent" target="_blank">Covalent</a>
-  </p>
-  <p>Then flexbox via <a href="https://github.com/angular/flex-layout" target="_blank">Angular Flex Layout</a>
-    and finally <a href="https://github.com/swimlane/ngx-charts" target="_blank">NGX Charts</a> - a free charting engine
-  </p>
-
-  <p>It's very much in progress, but there's something to show at the moment</p>
-
-  <p>So, what's included for now:</p>
-  <ul>
-    <li><a routerLink="/sortings">Real-time sorting algorithms comparison</a></li>
-    <li><a routerLink="/fractals">Simple fractal painter</a></li>
-  </ul>
-
-</mat-card>
+</div>
