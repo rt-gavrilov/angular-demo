@@ -14,6 +14,21 @@
         }
       },
       "architect": {
+
+        "build-fractal-worker": {
+          "builder": "@angular-devkit/build-webpack:webpack",
+          "options": {
+            "webpackConfig": "fractal-worker.webpack.config.js"
+          }
+        },
+
+        "serve-fractal-worker": {
+          "builder": "@angular-devkit/build-webpack:webpack-dev-server",
+          "options": {
+            "webpackConfig": "fractal-worker.webpack.config.js"
+          }
+        },
+
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
@@ -31,7 +46,9 @@
               "src/index.scss",
               "src/styles/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              { "input": "dist/fractal-worker.js", "lazy": true }
+            ]
           },
           "configurations": {
             "production": {

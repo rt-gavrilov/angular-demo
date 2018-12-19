@@ -10,3 +10,7 @@ export const FRACTALS_AVAILABLE: FractalSet[] = [
   new JuliaFractalSet(),
   new SpiderFractalSet()
 ];
+
+export function find(name: string): FractalSet {
+  return FRACTALS_AVAILABLE.find(fractal => fractal.name == name);
+}

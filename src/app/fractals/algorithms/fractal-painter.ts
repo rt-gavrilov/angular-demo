@@ -1,13 +1,9 @@
 import {Rectangle} from '../../utils/rectangle';
 import {FractalSet} from './fractal-set';
 
-export class FractalPainter {
+export abstract class FractalPainter {
 
-  constructor(
-    private strategy: FractalSet
-  ) {}
-
-  public paint(area: Rectangle, width: number, height: number): ImageData {
+  public static paint(fractal: FractalSet, area: Rectangle, width: number, height: number): ImageData {
 
     const result = new ImageData(width, height);
 
@@ -21,7 +17,7 @@ export class FractalPainter {
     for (let j = 0, y = area.top; j < height; j++, y += dy) {
       for (let i = 0, x = area.left; i < width; i++, x += dx) {
 
-        const pointValue: number = this.strategy.getPoint(x, y, iterations);
+        const pointValue: number = fractal.getPoint(x, y, iterations);
 
         result.data[position++] = 8 * pointValue;
         result.data[position++] = 4 * pointValue;

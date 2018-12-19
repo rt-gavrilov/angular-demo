@@ -14,6 +14,30 @@ export class Rectangle {
     return this.bottom - this.top;
   }
 
+  public get leftTopQuadrant(): Rectangle {
+    return new Rectangle(
+      this.left, this.top,this.left + this.width / 2, this.top + this.height / 2
+    );
+  }
+
+  public get rightTopQuadrant(): Rectangle {
+    return new Rectangle(
+      this.left + this.width / 2, this.top, this.right, this.top + this.height / 2
+    );
+  }
+
+  public get leftBottomQuadrant(): Rectangle {
+    return new Rectangle(
+      this.left, this.top + this.height / 2,this.left + this.width / 2, this.bottom
+    );
+  }
+
+  public get rightBottomQuadrant(): Rectangle {
+    return new Rectangle(
+      this.left + this.width / 2, this.top + this.height / 2,this.right, this.bottom
+    );
+  }
+
   public move(dx: number, dy: number): Rectangle {
     return new Rectangle(
       this.left + dx,
