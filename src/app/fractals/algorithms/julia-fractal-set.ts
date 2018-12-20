@@ -5,6 +5,8 @@ export class JuliaFractalSet extends FractalSet {
 
   public readonly name = 'Julia';
 
+  readonly numIterations: number = 64;
+
   public readonly initialArea = new Rectangle(-2, -2, 2, 2);
 
   public getPoint(x: number, y: number, max: number = 256): number {

@@ -5,6 +5,8 @@ export class NewtonFractalSet extends FractalSet {
 
   public readonly name = 'Newton';
 
+  readonly numIterations: number = 64;
+
   public readonly initialArea = new Rectangle(-1, -1, 1, 1);
 
   getPoint(x: number, y: number, iterations: number = 256): number {
