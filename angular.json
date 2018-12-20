@@ -18,14 +18,14 @@
         "build-fractal-worker": {
           "builder": "@angular-devkit/build-webpack:webpack",
           "options": {
-            "webpackConfig": "fractal-worker.webpack.config.js"
+            "webpackConfig": "fractal-worker.prod.webpack.config.js"
           }
         },
 
         "serve-fractal-worker": {
-          "builder": "@angular-devkit/build-webpack:webpack-dev-server",
+          "builder": "@angular-devkit/build-webpack:webpack",
           "options": {
-            "webpackConfig": "fractal-worker.webpack.config.js"
+            "webpackConfig": "fractal-worker.dev.webpack.config.js"
           }
         },
 
