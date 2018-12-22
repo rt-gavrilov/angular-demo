@@ -2,7 +2,7 @@ import {Rectangle} from '../utils/rectangle';
 import {FractalSet} from './algorithms/fractal-set';
 import {find} from './algorithms/fractals-available';
 import {Error} from 'tslint/lib/error';
-import gradstop from 'gradstop';
+import Rainbow from 'rainbowvis.js';
 
 const worker: Worker = self as any;
 
@@ -22,7 +22,8 @@ worker.onmessage = function({data}) {
           params.area.bottom
         ),
         params.imageWidth,
-        params.imageHeight
+        params.imageHeight,
+        params.palette
       );
 
       worker.postMessage({id, type: 'painted', imageData: image});
@@ -34,7 +35,7 @@ worker.onmessage = function({data}) {
 };
 
 
-function paint(fractal: FractalSet, area: Rectangle, width: number, height: number): ImageData {
+function paint(fractal: FractalSet, area: Rectangle, width: number, height: number, palette: string[]): ImageData {
 
   const result = new ImageData(width, height);
 
@@ -45,34 +46,29 @@ function paint(fractal: FractalSet, area: Rectangle, width: number, height: numb
 
   const iterations = fractal.numIterations;
 
-  const histogram = new Array(iterations).fill(0);
-
   const now = new Date().getTime();
 
-  const gradient: string[] = gradstop({
-    stops: iterations,
-    inputFormat: 'hex',
-    colorArray: ['#FFF', '#00F', '#0F0', '#000']
-  });
+  const rainbow = new Rainbow();
+  rainbow.setNumberRange(0, iterations - 1);
+  rainbow.setSpectrum(...palette);
 
   const reds = new Array(iterations);
   const greens = reds.slice();
   const blues = reds.slice();
 
-  for (let i = 0; i < gradient.length; i++) {
-    const rgb: string[] = gradient[i].match(/rgb\((\d+), (\d+), (\d+)\)/);
 
-    reds[i] = parseInt(rgb[1]);
-    greens[i] = parseInt(rgb[2]);
-    blues[i] = parseInt(rgb[3]);
+  for (let i = 0; i < iterations; i++) {
+    const rgb = rainbow.colourAt(i);
+
+    reds[i] = parseInt(rgb.substr(0, 2), 16);
+    greens[i] = parseInt(rgb.substr(2, 2), 16);
+    blues[i] = parseInt(rgb.substr(4, 2), 16);
   }
 
   for (let j = 0, y = area.top; j < height; j++, y += dy) {
     for (let i = 0, x = area.left; i < width; i++, x += dx) {
 
-      const pointValue: number = fractal.getPoint(x, y, iterations);
-
-      histogram[pointValue] ++;
+      const pointValue: number = fractal.getPoint(x, y, iterations) - 1;
 
       result.data[position++] = reds[pointValue];
       result.data[position++] = greens[pointValue];

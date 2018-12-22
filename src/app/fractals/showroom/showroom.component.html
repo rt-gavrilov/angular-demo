@@ -2,18 +2,21 @@
 
   <mat-card
     fxFlex="1 1 400px"
-    [@appear]="{value: true, params: {delay: 250 * i}}"
-    [routerLink]="[fractal.name]"
-    *ngFor="let fractal of fractals; let i = index;">
+    [@appear]="{value: true, params: {delay: 500 + 100 * i}}"
+    *ngFor="let item of items; let i = index;">
 
-    <rt-fractal
-      [fractalSet]="fractal"
-      style="height: 300px;">
-    </rt-fractal>
+    <a [routerLink]="[item.fractal.name]" [queryParams]="getQueryParams(item)">
+      <rt-fractal
+        [fractalSet]="item.fractal"
+        [area]="item.area"
+        [palette]="item.palette"
+        style="height: 300px;">
+      </rt-fractal>
+    </a>
 
-    <mat-card-title>
-      {{fractal.name}}
-    </mat-card-title>
+    <!--<mat-card-title>-->
+      <!--{{item.fractal.name}}-->
+    <!--</mat-card-title>-->
 
   </mat-card>
 

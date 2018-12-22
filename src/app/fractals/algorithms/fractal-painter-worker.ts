@@ -3,52 +3,64 @@ import {FractalSet} from './fractal-set';
 
 export class FractalPainterWorker {
 
-  private static readonly numChunks = 4;
+  private static readonly workerPoolSize = 4;
   private static lastWorker = 0;
-  private static readonly workerPool = new Array(FractalPainterWorker.numChunks).fill(
-    new Worker('fractal-worker.js')
+  private static readonly workerPool = new Array(FractalPainterWorker.workerPoolSize).fill(0).map(
+    () => new Worker('fractal-worker.js')
   );
 
-  public static async paint(context: CanvasRenderingContext2D, fractal: FractalSet, area: Rectangle, width: number, height: number) {
+  public static async paint(
+    context: CanvasRenderingContext2D,
+    fractal: FractalSet,
+    area: Rectangle,
+    width: number, height: number,
+    palette: string[]
+  ) {
 
     const now = new Date().getTime();
 
     FractalPainterWorker.paintChunk(
-      fractal, area.leftTopQuadrant, Math.floor(width / 2), Math.floor(height / 2)
+      fractal, area.leftTopQuadrant, Math.floor(width / 2), Math.floor(height / 2), palette
     ).then(imageData => {
       context.putImageData(imageData, 0, 0);
-      console.log('PAINTING TIME', new Date().getTime() - now);
+      // console.log('PAINTING TIME', new Date().getTime() - now);
     });
 
     FractalPainterWorker.paintChunk(
-      fractal, area.rightTopQuadrant, Math.ceil(width / 2), Math.floor(height / 2)
+      fractal, area.rightTopQuadrant, Math.ceil(width / 2), Math.floor(height / 2), palette
     ).then(imageData => {
       context.putImageData(imageData, width / 2, 0);
-      console.log('PAINTING TIME', new Date().getTime() - now);
+      // console.log('PAINTING TIME', new Date().getTime() - now);
     });
 
     FractalPainterWorker.paintChunk(
-      fractal, area.leftBottomQuadrant, Math.floor(width / 2), Math.ceil(height / 2)
+      fractal, area.leftBottomQuadrant, Math.floor(width / 2), Math.ceil(height / 2), palette
     ).then(imageData => {
       context.putImageData(imageData, 0, height / 2);
-      console.log('PAINTING TIME', new Date().getTime() - now);
+      // console.log('PAINTING TIME', new Date().getTime() - now);
     });
 
     FractalPainterWorker.paintChunk(
-      fractal, area.rightBottomQuadrant, Math.ceil(width / 2), Math.ceil(height / 2)
+      fractal, area.rightBottomQuadrant, Math.ceil(width / 2), Math.ceil(height / 2), palette
     ).then(imageData => {
       context.putImageData(imageData, width / 2, height / 2);
-      console.log('PAINTING TIME', new Date().getTime() - now);
+      // console.log('PAINTING TIME', new Date().getTime() - now);
     });
   }
 
-  public static async paintChunk(fractal: FractalSet, area: Rectangle, width: number, height: number): Promise<ImageData> {
+  private static async paintChunk(
+    fractal: FractalSet,
+    area: Rectangle,
+    width: number,
+    height: number,
+    palette: string[]
+  ): Promise<ImageData> {
 
     const messageId = Math.random();
 
     FractalPainterWorker.lastWorker ++;
     const worker = FractalPainterWorker.workerPool[
-      FractalPainterWorker.lastWorker % FractalPainterWorker.numChunks
+      FractalPainterWorker.lastWorker % FractalPainterWorker.workerPoolSize
     ];
 
     worker.postMessage({
@@ -58,7 +70,8 @@ export class FractalPainterWorker {
         fractal: fractal.name,
         area,
         imageWidth: width,
-        imageHeight: height
+        imageHeight: height,
+        palette
       }
     });
 

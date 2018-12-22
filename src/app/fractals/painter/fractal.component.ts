@@ -15,6 +15,7 @@ export class FractalComponent implements OnChanges {
 
   @Input() fractalSet: FractalSet;
   @Input() area: Rectangle;
+  @Input() palette: string[];
   @Input() keepWhRate = false;
 
   private bounds: Rectangle;
@@ -25,17 +26,14 @@ export class FractalComponent implements OnChanges {
       return;
     }
 
-    const now = new Date().getTime();
-
-    await FractalPainterWorker.paint(
+    FractalPainterWorker.paint(
       this.canvas.nativeElement.getContext('2d'),
       this.fractalSet,
       this.transformArea(),
       this.bounds.width,
-      this.bounds.height
+      this.bounds.height,
+      this.palette
     );
-
-
   }
 
   private transformArea(): Rectangle {
@@ -77,6 +75,7 @@ export class FractalComponent implements OnChanges {
 
   public ngOnChanges() {
     this.area = this.area || this.fractalSet.initialArea;
+    this.palette = this.palette || this.fractalSet.colorPalette;
     this.redraw();
   }
 }
