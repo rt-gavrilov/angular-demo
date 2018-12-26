@@ -29,6 +29,20 @@
           }
         },
 
+        "build-sorting-worker": {
+          "builder": "@angular-devkit/build-webpack:webpack",
+          "options": {
+            "webpackConfig": "sorting-worker.prod.webpack.config.js"
+          }
+        },
+
+        "serve-sorting-worker": {
+          "builder": "@angular-devkit/build-webpack:webpack",
+          "options": {
+            "webpackConfig": "sorting-worker.dev.webpack.config.js"
+          }
+        },
+
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
@@ -47,7 +61,8 @@
               "src/styles/styles.scss"
             ],
             "scripts": [
-              { "input": "dist/fractal-worker.js", "lazy": true }
+              { "input": "dist/fractal-worker.js", "lazy": true },
+              { "input": "dist/sorting-worker.js", "lazy": true }
             ]
           },
           "configurations": {

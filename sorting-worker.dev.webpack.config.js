@@ -1,11 +1,11 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/app/fractals/fractal.worker.ts',
+  entry: './src/app/sortings/sorting.worker.ts',
   mode: 'production',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'fractal-worker.js'
+    filename: 'sorting-worker.js'
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js']

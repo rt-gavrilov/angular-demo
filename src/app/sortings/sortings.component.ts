@@ -4,6 +4,8 @@ import {sleep} from '../utils/async-utils';
 import {ArrayBuilder} from '../utils/array-builder';
 import {SortingOptions} from './options/options';
 import {Sorting} from './algorithms/sorting';
+import {WorkerPool} from '../utils/worker-pool';
+import {curveMonotoneX}  from 'd3';
 
 @Component({
   selector: 'rt-sortings',
@@ -13,6 +15,8 @@ import {Sorting} from './algorithms/sorting';
 export class SortingsComponent {
 
   public options: SortingOptions;
+
+  private readonly workerPool = new WorkerPool('sorting-worker.js');
 
   public running = false;
 
@@ -24,11 +28,15 @@ export class SortingsComponent {
 
   public chartData;
 
+  public get curve() {
+    return curveMonotoneX;
+  }
+
   public axisDigits(val: any): any {
     return new TdDigitsPipe().transform(val);
   }
 
-  public get sizes(): number[] {
+  private get sizes(): number[] {
     const size = this.options.arraySize;
 
     return new ArrayBuilder(11).ramp(0, size / 10).raw;
@@ -54,12 +62,14 @@ export class SortingsComponent {
   private async compareAlgorithms() {
     const interrupted = new Set<Sorting>();
 
-    const temp = this.options.algorithms.map( value => ({
+    const chunk = this.options.algorithms.map( value => ({
       name: value.name,
       series: []
     }));
 
     for (const size of this.sizes) {
+
+      const array = this.createArray(this.options.arrayTypes[0].id, size);
 
       for (const sorting of this.options.algorithms) {
 
@@ -67,26 +77,23 @@ export class SortingsComponent {
           continue;
         }
 
-        const time = this.sortAndMeasure(
-          sorting,
-          this.createArray(this.options.arrayTypes[0].id, size)
-        );
+        const time = await this.sortAndMeasure(sorting, array.slice());
 
-        temp
+        chunk
           .find( value => value.name === sorting.name )
           .series.push({
             name: size,
             value: time
           });
 
-        if (time > 100) {
+        if (time > 500) {
           interrupted.add(sorting);
         }
       }
 
       await sleep(500);
 
-      this.chartData = temp.slice();
+      this.chartData = chunk.slice();
     }
   }
 
@@ -108,7 +115,7 @@ export class SortingsComponent {
           continue;
         }
 
-        const time = this.sortAndMeasure(
+        const time = await this.sortAndMeasure(
           this.options.algorithms[0],
           this.createArray(arrayType.id, size)
         );
@@ -120,7 +127,7 @@ export class SortingsComponent {
             value: time
           });
 
-        if (time > 100) {
+        if (time > 500) {
           interrupted.add(arrayType.id);
         }
       }
@@ -131,10 +138,9 @@ export class SortingsComponent {
     }
   }
 
-  private sortAndMeasure(sorting: Sorting, array: number[]): number {
-    const now = new Date().getTime();
-    sorting.run( array );
-    return new Date().getTime() - now;
+  private async sortAndMeasure(sorting: Sorting, array: number[]): Promise<number> {
+    const result = await this.workerPool.run({type: 'sort', params: {sorting: sorting.name, array}});
+    return result.time;
   }
 
   private createArray(type: string, size: number): number[] {

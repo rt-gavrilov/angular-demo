@@ -1,5 +1,4 @@
 import {Sorting} from './sorting';
-import {StrangeSorting} from './strange-sorting';
 import {BubbleSorting} from './bubble-sorting';
 import {ShakerSorting} from './shaker-sorting';
 import {SelectionSorting} from './selection-sorting';
@@ -11,7 +10,7 @@ import {MergeSorting} from './merge-sorting';
 import {ShellSorting} from './shell-sorting';
 
 export const PRIMITIVES: Sorting[] = [
-  new StrangeSorting(),
+  // new StrangeSorting(),
   new BubbleSorting(),
   new ShakerSorting(),
   new SelectionSorting(),
@@ -27,3 +26,7 @@ export const SMARTS: Sorting[] = [
 ];
 
 export const ALL: Sorting[] = [... PRIMITIVES, ... SMARTS];
+
+export function find(name: string): Sorting {
+  return ALL.find(sorting => sorting.name == name);
+}
