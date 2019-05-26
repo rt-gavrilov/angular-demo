@@ -7,17 +7,18 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {RouterModule, Routes} from '@angular/router';
-import {FlexLayoutModule} from '@angular/flex-layout';
 import {RootComponent} from './root.component';
 import {OverlayModule} from '@angular/cdk/overlay';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 const routes: Routes = [
   {path: '', canActivate: [IntroTestGuard], component: AppComponent, children: [
     {path: 'about', loadChildren: './about/about.module#AboutModule'},
     {path: 'sortings', loadChildren: './sortings/sortings.module#SortingsModule'},
     {path: 'fractals', loadChildren: './fractals/fractals.module#FractalsModule'},
+    {path: 'change-detection', loadChildren: './change-detection/change-detection.module#ChangeDetectionModule'},
     {path: '', redirectTo: 'about', pathMatch: 'full'}
   ]},
   {path: 'test', loadChildren: './intro-test/intro-test.module#IntroTestModule'},

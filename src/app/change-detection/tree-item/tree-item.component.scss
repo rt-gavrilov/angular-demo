@@ -1,0 +1,29 @@
+:host {
+  display: block;
+  position: relative;
+}
+
+.content {
+  height: 100px;
+  box-sizing: border-box;
+  margin: 4px;
+
+  mat-card {
+    height: 100%;
+    box-sizing: border-box;
+
+    mat-checkbox {
+      position: relative;
+      z-index: 1000;
+    }
+  }
+}
+
+svg {
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  height: 210px;
+  top: 0;
+  z-index: 100;
+}
