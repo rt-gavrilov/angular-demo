@@ -1,6 +1,6 @@
-# Angular Demo
+# Cli8
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.5.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.0-rc.4.
 
 ## Development server
 

@@ -11,7 +11,7 @@ import {FractalPainterWorker} from '../algorithms/fractal-painter-worker';
 })
 export class FractalComponent implements OnChanges {
 
-  @ViewChild('canvas') canvas;
+  @ViewChild('canvas', {static: true}) canvas;
 
   @Input() fractalSet: FractalSet;
   @Input() area: Rectangle;

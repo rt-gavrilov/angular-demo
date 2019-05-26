@@ -44,4 +44,4 @@ const routes: Routes = [
   providers: [IntroTestGuard],
   bootstrap: [RootComponent]
 })
-export class AppModule { }
+export class RootModule { }

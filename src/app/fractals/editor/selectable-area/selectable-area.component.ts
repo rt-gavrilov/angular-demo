@@ -10,7 +10,7 @@ export class SelectableAreaComponent {
 
   @Output() select = new EventEmitter<Rectangle>();
 
-  @ViewChild('container') container;
+  @ViewChild('container', {static: true}) container;
 
   public selectedArea: Rectangle;
 
