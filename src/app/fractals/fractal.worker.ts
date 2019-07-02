@@ -1,38 +1,67 @@
+/// <reference lib="webworker" />
+
 import {Rectangle} from '../utils/rectangle';
 import {FractalSet} from './algorithms/fractal-set';
 import {find} from './algorithms/fractals-available';
-import {Error} from 'tslint/lib/error';
 import Rainbow from 'rainbowvis.js';
 
-const worker: Worker = self as any;
+// const worker: Worker = self as any;
+
+console.log('FRACTAL WORKER');
+
+addEventListener('message', ({ data }) => {
+    const {id, type, params} = data;
+
+    switch (type) {
+        case 'paint':
+            const image = paint(
+                find(params.fractal),
+                new Rectangle(
+                    params.area.left,
+                    params.area.top,
+                    params.area.right,
+                    params.area.bottom
+                ),
+                params.imageWidth,
+                params.imageHeight,
+                params.palette
+            );
+
+            postMessage({id, type: 'painted', imageData: image});
+
+            break;
+        default:
+            throw new Error(`Unsupported command '${type}'`);
+    }
+});
 
 
-worker.onmessage = function({data}) {
-
-  const {id, type, params} = data;
-
-  switch (type) {
-    case 'paint':
-      const image = paint(
-        find(params.fractal),
-        new Rectangle(
-          params.area.left,
-          params.area.top,
-          params.area.right,
-          params.area.bottom
-        ),
-        params.imageWidth,
-        params.imageHeight,
-        params.palette
-      );
-
-      worker.postMessage({id, type: 'painted', imageData: image});
-
-      break;
-    default:
-      throw new Error('Unsupported command');
-  }
-};
+// worker.onmessage = function({data}) {
+//
+//   const {id, type, params} = data;
+//
+//   switch (type) {
+//     case 'paint':
+//       const image = paint(
+//         find(params.fractal),
+//         new Rectangle(
+//           params.area.left,
+//           params.area.top,
+//           params.area.right,
+//           params.area.bottom
+//         ),
+//         params.imageWidth,
+//         params.imageHeight,
+//         params.palette
+//       );
+//
+//       worker.postMessage({id, type: 'painted', imageData: image});
+//
+//       break;
+//     default:
+//       throw new Error(`Unsupported command '${type}'`);
+//   }
+// };
 
 
 function paint(fractal: FractalSet, area: Rectangle, width: number, height: number, palette: string[]): ImageData {

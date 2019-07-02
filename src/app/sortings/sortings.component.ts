@@ -16,7 +16,7 @@ export class SortingsComponent {
 
   public options: SortingOptions;
 
-  private readonly workerPool = new WorkerPool('sorting-worker.js');
+  private readonly workerPool = new WorkerPool([new Worker('./sorting.worker', { type: 'module' })]);
 
   public running = false;
 
