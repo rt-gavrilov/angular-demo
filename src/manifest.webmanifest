@@ -1,6 +1,6 @@
 {
-  "name": "cli8final",
-  "short_name": "cli8final",
+  "name": "Angular Demo",
+  "short_name": "Angular Demo",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
