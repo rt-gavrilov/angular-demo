@@ -4,7 +4,9 @@ import {WorkerPool} from '../../utils/worker-pool';
 
 export class FractalPainterWorker {
 
-  private static readonly workerPool = new WorkerPool([new Worker('../fractal.worker', { type: 'module' })]);
+  private static readonly workerPool = new WorkerPool(
+      () => new Worker('../fractal.worker', { name: 'fractal', type: 'module' }),
+  );
 
   public static async paint(
     context: CanvasRenderingContext2D,

@@ -4,8 +4,8 @@ export class WorkerPool {
   private lastWorker = 0;
   private workers: Worker[];
 
-  constructor(workers: Worker[]) {
-    this.workers = workers;
+  constructor(workerFactory: () => Worker, size = 4) {
+      this.workers = new Array(size).fill(0).map(() => workerFactory());
   }
 
   public async run(command: {type: string, params: any}): Promise<any> {
